@@ -17,6 +17,9 @@ namespace MethodStore
         
         public ObjectMethod()
         {
+            Module = "";
+            MethodName = "";
+            Description = "";
             DateCreation = DateTime.Now;
         }
     }

@@ -16,6 +16,12 @@
             <StackPanel Orientation="Vertical">
 
                 <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="Save" Content="Записать" Background="LightSteelBlue"/>
+                </StackPanel>
+                
+                <Separator Height="1" Background="{x:Null}"/>
                 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Модуль" MinWidth="90"/>

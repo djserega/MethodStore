@@ -20,25 +20,46 @@
         <StackPanel Orientation="Horizontal">
             <Separator Width="5" Background="{x:Null}"/>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                
+
                 <Separator Height="5" Background="{x:Null}"/>
-                
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
+
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <Separator Width="1" Background="{x:Null}"/>
+                        <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
                             Click="ButtonAddMethod_Click"/>
-                    <Separator Width="1" Background="{x:Null}"/>
-                    <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal"
+                        <Separator Width="1" Background="{x:Null}"/>
+                        <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal"
                             Click="ButtonEditMethod_Click"/>
+                        <Separator Width="1" Background="{x:Null}"/>
+                    </StackPanel>
+                    <Separator Width="5" Background="{x:Null}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Тип поиска:"/>
+                        <Label Content="Модуль"/>
+                        <CheckBox x:Name="CheckBoxFilterModule" Background="LightSteelBlue"
+                                  IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterModule}"
+                                  Click="CheckBoxFilterModule_Click"/>
+                        <Label Content="Метод"/>
+                        <CheckBox x:Name="CheckBoxFilterMethodName" Background="LightSteelBlue"
+                                  IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterMethodName}"
+                                  Click="CheckBoxFilterMethodName_Click"/>
+                        <Label Content="Описание"/>
+                        <CheckBox x:Name="CheckBoxFilterDescription" Background="LightSteelBlue"
+                                  IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterDescription}"
+                                  Click="CheckBoxFilterDescription_Click"/>
+                    </StackPanel>
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
-                
+
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Поиск:"/>
-                    <TextBox Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='56'}"/>
+                    <TextBox x:Name="TextBoxFilter" Background="LightSteelBlue" BorderBrush="Teal"
+                             Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='56'}"
+                             TextChanged="TextBoxFilter_TextChanged"/>
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <DataGrid x:Name="DataGridData" Background="LightSteelBlue" ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}" ItemsSource="{Binding _dataMethods}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"
@@ -51,7 +72,7 @@
                         <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                
+
             </StackPanel>
             <Separator Width="5" Background="{x:Null}"/>
         </StackPanel>
