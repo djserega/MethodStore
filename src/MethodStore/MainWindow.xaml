@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow x:Class="MethodStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MethodStore"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        x:Name="MainWindowMethodStore"
+        Title="MainWindow" Height="450" Width="800"
+        Background="Teal"
+        Loaded="MainWindowMethodStore_Loaded">
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="LightSteelBlue"/>
+            <Setter Property="BorderBrush" Value="Teal"/>
+        </Style>
+    </Controls:MetroWindow.Resources>
+    <Grid x:Name="MainGrid">
+        <StackPanel Orientation="Horizontal">
+            <Separator Width="5" Background="{x:Null}"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                
+                <Separator Height="5" Background="{x:Null}"/>
+                
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
+                            Click="ButtonAddMethod_Click"/>
+                    <Separator Width="1" Background="{x:Null}"/>
+                    <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal"
+                            Click="ButtonEditMethod_Click"/>
+                </StackPanel>
+                
+                <Separator Height="1" Background="{x:Null}"/>
+                
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Поиск:"/>
+                    <TextBox Background="LightSteelBlue" BorderBrush="Teal"
+                             Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='56'}"/>
+                </StackPanel>
+                
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <DataGrid x:Name="DataGridData" Background="LightSteelBlue" ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}" ItemsSource="{Binding _dataMethods}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"
+                          Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="250"/>
+                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="250"/>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="350"/>
+                        <DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
+                        <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+            </StackPanel>
+            <Separator Width="5" Background="{x:Null}"/>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>
