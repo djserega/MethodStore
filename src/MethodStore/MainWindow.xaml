@@ -58,9 +58,14 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Поиск:"/>
-                    <TextBox x:Name="TextBoxFilter" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='56'}"
-                             TextChanged="TextBoxFilter_TextChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="TextBoxFilter" Background="LightSteelBlue" BorderBrush="Teal"
+                                 Text="{Binding ElementName=MainWindowMethodStore, Path=FilterText}"
+                                 Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='76'}"
+                                 TextChanged="TextBoxFilter_TextChanged"/>
+                        <Button x:Name="ButtonClearFilter" Background="LightSteelBlue" Content="X" Width="20"
+                                Click="ButtonClearFilter_Click"/>
+                    </StackPanel>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>

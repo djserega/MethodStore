@@ -33,7 +33,13 @@ namespace MethodStore
 
         #endregion
 
-        #region Checkbox filter (fields, properties)
+        #region Filter (fields, properties)
+
+        public static readonly DependencyProperty _filterText = DependencyProperty.Register(
+            "FilterText",
+            typeof(string),
+            typeof(MainWindow),
+            new UIPropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty _filterModule = DependencyProperty.Register(
             "FilterModule",
@@ -54,6 +60,15 @@ namespace MethodStore
             new UIPropertyMetadata(false));
 
 
+        private string FilterText
+        {
+            get { return (string)(GetValue(_filterText)); }
+            set
+            {
+                SetValue(_filterText, value);
+                SetItemSourceDataGrid();
+            }
+        }
         private bool FilterModule
         {
             get { return (bool)GetValue(_filterModule); }
@@ -208,5 +223,9 @@ namespace MethodStore
             SetItemSourceDataGrid();
         }
 
+        private void ButtonClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            FilterText = string.Empty;
+        }
     }
 }
