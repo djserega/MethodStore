@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MethodStore
@@ -10,15 +11,22 @@ namespace MethodStore
     internal class DirFile
     {
         private string _baseDirectory;
+        private string _pathData;
         private string _pathDataFiles;
+        private string _fullNameFile;
 
         internal DirFile()
         {
             _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            _pathDataFiles = Path.Combine(
+            _pathData = Path.Combine(
                 _baseDirectory,
-                "Data",
+                "Data");
+            _pathDataFiles = Path.Combine(
+                _pathData,
                 "Methods");
+            _fullNameFile = Path.Combine(
+                _pathData,
+                "TypeMethods.txt");
         }
 
         private bool CreatePathDataFiles()
@@ -103,5 +111,33 @@ namespace MethodStore
         {
             new FileInfo(path).Delete();
         }
+
+        internal List<TypeMethods> GetListTypeMethods()
+        {
+            FileInfo fileInfo = new FileInfo(_fullNameFile);
+            if (fileInfo.Exists)
+                return ReadFilesTypeMethods(fileInfo);
+            else
+            {
+                fileInfo.Create();
+                return null;
+            }
+        }
+
+        private List<TypeMethods> ReadFilesTypeMethods(FileInfo fileInfo)
+        {
+            List<TypeMethods> listTypeMethods = new List<TypeMethods>();
+
+            using (StreamReader reader = new StreamReader(fileInfo.FullName))
+            {
+                while (!reader.EndOfStream)
+                {
+                    listTypeMethods.Add(new TypeMethods(reader.ReadLine()));
+                }
+            }
+
+            return listTypeMethods;
+        }
+
     }
 }

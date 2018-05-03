@@ -12,6 +12,7 @@ namespace MethodStore
         private string _methodName;
 
         public Guid ID { get; set; }
+        public TypeMethods TypeMethods { get; set; }
         public string Module
         {
             get { return _module; }

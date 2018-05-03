@@ -59,6 +59,15 @@
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
+                    <Label Content="Тип метода" MinWidth="90"/>
+                    <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
+                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" 
+                              SelectionChanged="ComboBoxTypeMethods_SelectionChanged"/>
+                </StackPanel>
+
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal">
                     <Label Content="Модуль" MinWidth="90"/>
                     <TextBox x:Name="TextBoxModule" Text="{Binding Path=Module, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal" 
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"

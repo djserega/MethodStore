@@ -78,6 +78,7 @@
                           Height="{Binding Path=ActualHeight, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='77'}"
                           MouseDoubleClick="DataGridData_MouseDoubleClick">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Тип модуля" Binding="{Binding TypeMethod}" MaxWidth="150" MinWidth="50"/>
                         <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="400" MinWidth="250"/>
                         <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="400" MinWidth="250"/>
                         <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MaxWidth="600" MinWidth="350"/>

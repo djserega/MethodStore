@@ -22,8 +22,10 @@ namespace MethodStore
     public partial class WindowObjectMethod : MetroWindow
     {
         internal Guid ID { get; private set; }
+
         private ObjectMethod _ref;
         private bool _isNewObject;
+        private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
 
         public WindowObjectMethod(Guid id, bool isNewObject = false)
         {
@@ -39,6 +41,8 @@ namespace MethodStore
                 GetTextInClipboard();
 
             DataContext = _ref;
+
+            ReadFileTypeMethods();
         }
 
         private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
@@ -108,6 +112,27 @@ namespace MethodStore
         private void TextBoxMethodName_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
+        }
+
+        private async void ReadFileTypeMethods()
+        {
+            _listTypeMethods = await ReadFileTypeMethodsAsync();
+            ComboBoxTypeMethods.ItemsSource = _listTypeMethods;
+
+            if (!_isNewObject)
+                ComboBoxTypeMethods.SelectedItem = _ref.TypeMethods;
+        }
+
+        private async Task<List<TypeMethods>> ReadFileTypeMethodsAsync()
+        {
+            return await Task.Run(() => new DirFile().GetListTypeMethods());
+        }
+
+        private void ComboBoxTypeMethods_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+                if (comboBox.SelectedItem is TypeMethods typeMethods)
+                    _ref.TypeMethods = typeMethods;
         }
     }
 }
