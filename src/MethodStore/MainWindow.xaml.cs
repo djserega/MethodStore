@@ -133,8 +133,12 @@ namespace MethodStore
 
         private void ButtonEditMethod_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGridData.SelectedItem is ObjectMethod objectMethod)
-                ShowFormObjectMethod(objectMethod.ID);
+            OpenSelectedObjectMethod();
+        }
+
+        private void ButtonClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            FilterText = string.Empty;
         }
 
         #endregion
@@ -198,11 +202,6 @@ namespace MethodStore
             SetItemSourceDataGrid();
         }
 
-        private void ButtonClearFilter_Click(object sender, RoutedEventArgs e)
-        {
-            FilterText = string.Empty;
-        }
-
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
             WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
@@ -212,6 +211,17 @@ namespace MethodStore
             formObject.ShowDialog();
 
             _refreshDataGrid.EvokeRefreshDataGrid();
+        }
+
+        private void DataGridData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenSelectedObjectMethod();
+        }
+
+        private void OpenSelectedObjectMethod()
+        {
+            if (DataGridData.SelectedItem is ObjectMethod objectMethod)
+                ShowFormObjectMethod(objectMethod.ID);
         }
     }
 }
