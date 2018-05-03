@@ -31,15 +31,6 @@ namespace MethodStore
 
             ID = _ref.ID;
 
-            //_ref = new ObjectMethod()
-            //{
-            //    DateCreation = DateTime.Now,
-            //    Description = "Установка активного элемента на первом не заполненном реквизите",
-            //    MethodName = "УстановитьТекущийЭлементФормы",
-            //    Module = "ParfumsОбщегоНазначенияКлиентСервер",
-            //    DateEdited = DateTime.Now
-            //};
-
             DataContext = _ref;
                                        
             Title += " (новый)";

@@ -45,7 +45,7 @@ namespace MethodStore
             return dirDataFilesExists;
         }
 
-        private List<FileInfo> GetListFilesObjectMethods()
+        internal List<FileInfo> GetListFilesObjectMethods()
         {
             if (!CreatePathDataFiles())
                 return null;

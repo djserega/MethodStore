@@ -106,24 +106,7 @@ namespace MethodStore
             InitializeComponent();
 
             _refreshDataGrid = new RefreshDataGridEvents();
-            _dataMethods = new List<ObjectMethod>
-            {
-                new ObjectMethod()
-                {
-                    Description = "object",
-                    DateEdited = DateTime.Now
-                },
-                new ObjectMethod()
-                {
-                    MethodName = "new",
-                    DateEdited = DateTime.Now
-                },
-                new ObjectMethod()
-                {
-                    Module = "class",
-                    DateEdited = DateTime.Now
-                }
-            };
+            _dataMethods = new UpdateFilesObjectMethod().GetListObjectMethod();
 
             DataContext = this;
 
