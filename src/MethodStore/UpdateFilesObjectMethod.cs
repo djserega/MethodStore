@@ -19,8 +19,13 @@ namespace MethodStore
         {
             Id = id;
         }
+        internal UpdateFilesObjectMethod(int id, ObjectMethod objectMethod)
+        {
+            Id = id;
+            RefObjectMethod = objectMethod;
+        }
 
-        internal ObjectMethod GetObjectMethod()
+        internal ObjectMethod Get()
         {
             RefObjectMethod = new DirFile().GetFileObjectMethods(Id);
 
@@ -29,7 +34,7 @@ namespace MethodStore
             return RefObjectMethod;
         }
 
-        internal List<ObjectMethod> GetListObjectMethod()
+        internal List<ObjectMethod> GetList()
         {
             Json json = new Json();
 
@@ -42,5 +47,11 @@ namespace MethodStore
 
             return listObject;
         }
+
+        internal void Save()
+        {
+            new DirFile().SaveObjectMethods((int)Id, RefObjectMethod);
+        }
+
     }
 }

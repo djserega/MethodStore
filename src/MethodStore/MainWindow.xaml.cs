@@ -167,7 +167,7 @@ namespace MethodStore
             if (!_formLoaded)
                 return;
 
-            _dataMethods = new UpdateFilesObjectMethod().GetListObjectMethod();
+            _dataMethods = new UpdateFilesObjectMethod().GetList();
 
             string textFilter = TextBoxFilter.Text;
 

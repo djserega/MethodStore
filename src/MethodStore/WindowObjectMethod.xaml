@@ -28,7 +28,8 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Separator Width="1" Background="{x:Null}"/>
-                    <Button x:Name="Save" Content="Записать" Background="LightSteelBlue"/>
+                    <Button x:Name="ButtonSave" Content="Записать" Background="LightSteelBlue"
+                            Click="ButtonSave_Click"/>
                     <Separator Width="1" Background="{x:Null}"/>
                 </StackPanel>
                 

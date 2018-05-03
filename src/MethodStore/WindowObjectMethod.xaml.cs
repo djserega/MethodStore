@@ -27,7 +27,7 @@ namespace MethodStore
         {
             InitializeComponent();
 
-            _ref = new UpdateFilesObjectMethod(id).GetObjectMethod();
+            _ref = new UpdateFilesObjectMethod(id).Get();
 
             ID = _ref.ID;
 
@@ -44,6 +44,13 @@ namespace MethodStore
         private void ButtonDeleteParameter_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            _ref.DateEdited = DateTime.Now;
+            new UpdateFilesObjectMethod(ID, _ref).Save();
+            Close();
         }
     }
 }

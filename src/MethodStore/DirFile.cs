@@ -67,26 +67,46 @@ namespace MethodStore
             if (listFiles.Count > 0)
             {
                 listFiles.Sort((a, b) => string.Compare(b.Name, a.Name));
+                //listFiles.Sort((a, b) => DateTime.Compare(b.LastWriteTimeUtc, a.LastWriteTimeUtc));
+                //listFiles.Sort((a, b) => Compare(a, b));
                 idObject = int.Parse(listFiles.First().Name.Replace(".json", string.Empty));
                 idObject++;
             }
 
-            string pathObject = Path.Combine(
-                _pathDataFiles,
-                $"{idObject.ToString()}.json");
-
             Json json = new Json();
 
-            FileInfo fileObject = new FileInfo(pathObject);
-            if (!fileObject.Exists)                                                                 
+            FileInfo fileObject = new FileInfo(GetFileNameObjectMethod(idObject));
+            if (!fileObject.Exists)
             {
                 json.SerializeObjectMethod(fileObject, new ObjectMethod());
             }
 
             refObject = json.DeserialiseObjectMethod(fileObject);
+            refObject.ID = idObject;
 
             return refObject;
         }
 
+        private bool Compare(FileInfo a, FileInfo b)
+        {
+            return (int.Parse(b.Name.Replace(".json", string.Empty)))
+                     <
+                 (int.Parse(a.Name.Replace(".json", string.Empty)));
+        }
+
+        internal void SaveObjectMethods(int id, ObjectMethod objectMethod)
+        {
+            if (!CreatePathDataFiles())
+                return;
+
+            new Json().SerializeObjectMethod(new FileInfo(GetFileNameObjectMethod(id)), objectMethod);
+        }
+
+        private string GetFileNameObjectMethod(int id)
+        {
+            return Path.Combine(
+                _pathDataFiles,
+                $"{id.ToString()}.json");
+        }
     }
 }
