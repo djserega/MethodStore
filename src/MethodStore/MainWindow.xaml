@@ -19,6 +19,7 @@
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
     </Controls:MetroWindow.Resources>
+    
     <Grid x:Name="MainGrid">
         <StackPanel Orientation="Horizontal">
             <Separator Width="5" Background="{x:Null}"/>
@@ -73,11 +74,11 @@
                 <DataGrid x:Name="DataGridData" Background="LightSteelBlue" ItemsSource="{Binding _dataMethods}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"
                           ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
                           RowStyle="{StaticResource DataGridStyleRow}"
-                          Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}">
+                          Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}" IsTextSearchEnabled="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="250"/>
-                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="250"/>
-                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="350"/>
+                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="150"/>
+                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="150"/>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="250"/>
                         <DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
                         <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
                     </DataGrid.Columns>

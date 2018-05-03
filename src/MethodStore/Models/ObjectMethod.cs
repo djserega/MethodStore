@@ -8,13 +8,15 @@ namespace MethodStore
 {
     public class ObjectMethod
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public string Module { get; set; }
         public string MethodName { get; set; }
         public Parameter[] Parameters { get; set; }
         public string Description { get; set; }
         public DateTime DateCreation { get; set; }
         public DateTime DateEdited { get; set; }
+
+        public string Path { get; set; }
         
         public ObjectMethod()
         {

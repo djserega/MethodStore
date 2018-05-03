@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
         Title="WindowObjectMethod" Height="400" Width="600"
-        Background="Teal">
+        Background="Teal"
+        Closed="FormObjectMethod_Closed">
     <Controls:MetroWindow.Resources>
         <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="LightSteelBlue"/>
@@ -32,15 +33,15 @@
                             Click="ButtonSave_Click"/>
                     <Separator Width="1" Background="{x:Null}"/>
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
-                
+
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Модуль" MinWidth="90"/>
                     <TextBox Text="{Binding Path=Module}" Background="LightSteelBlue" BorderBrush="Teal"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
@@ -48,7 +49,7 @@
                     <TextBox Text="{Binding Path=MethodName}" Background="LightSteelBlue" BorderBrush="Teal"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
@@ -58,19 +59,45 @@
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
-                
+
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <Label Content="Изменено" MinWidth="90"/>
-                    <DatePicker Text="{Binding Path=DateEdited}" Background="LightSteelBlue" BorderBrush="Teal"/>
+                    <DatePicker Text="{Binding Path=DateEdited}" Background="LightSteelBlue" BorderBrush="Teal">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox Background="LightSteelBlue" 
+                                                Text="{Binding Path=SelectedDate, StringFormat={}{0:dd-MM-yyyy HH:mm:ss}, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
 
                     <Separator Width="5" Background="{x:Null}"/>
 
                     <Label Content="Создано" MinWidth="90"/>
-                    <DatePicker Text="{Binding Path=DateCreation}" Background="LightSteelBlue" BorderBrush="Teal"/>
-                    
+                    <DatePicker Text="{Binding Path=DateCreation}" Background="LightSteelBlue" BorderBrush="Teal">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox Background="LightSteelBlue" 
+                                                Text="{Binding Path=SelectedDate, StringFormat={}{0:dd-MM-yyyy HH:mm:ss}, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+
                 </StackPanel>
-                
+
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
@@ -98,7 +125,15 @@
                         </DataGrid>
                     </StackPanel>
                 </StackPanel>
-                
+
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Буфер обмена" MinWidth="90"/>
+                    <TextBox x:Name="TextBoxClipBoard" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
+                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
+                </StackPanel>
+
                 <Separator Height="1" Background="{x:Null}"/>
 
             </StackPanel>

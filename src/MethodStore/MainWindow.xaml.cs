@@ -128,12 +128,13 @@ namespace MethodStore
 
         private void ButtonAddMethod_Click(object sender, RoutedEventArgs e)
         {
-            ShowFormObjectMethod();
+            ShowFormObjectMethod(Guid.NewGuid(), true);
         }
 
         private void ButtonEditMethod_Click(object sender, RoutedEventArgs e)
         {
-            ShowFormObjectMethod();
+            if (DataGridData.SelectedItem is ObjectMethod objectMethod)
+                ShowFormObjectMethod(objectMethod.ID);
         }
 
         #endregion
@@ -169,7 +170,7 @@ namespace MethodStore
 
             _dataMethods = new UpdateFilesObjectMethod().GetList();
 
-            string textFilter = TextBoxFilter.Text;
+            string textFilter = TextBoxFilter.Text.ToUpper();
 
             CollectionViewSource collectionSourceFilter = new CollectionViewSource() { Source = _dataMethods };
 
@@ -181,9 +182,9 @@ namespace MethodStore
                 if (!string.IsNullOrWhiteSpace(textFilter))
                     objectFilter = new Predicate<object>(
                        item => (
-                                (FilterModule && ((ObjectMethod)item).Module.Contains(textFilter))
-                            || (FilterMethodName && ((ObjectMethod)item).MethodName.Contains(textFilter))
-                            || (FilterDescription && ((ObjectMethod)item).Description.Contains(textFilter))
+                                (FilterModule && ((ObjectMethod)item).Module.ToUpper().Contains(textFilter))
+                            ||  (FilterMethodName && ((ObjectMethod)item).MethodName.ToUpper().Contains(textFilter))
+                            ||  (FilterDescription && ((ObjectMethod)item).Description.ToUpper().Contains(textFilter))
                             )
                         );
 
@@ -202,9 +203,9 @@ namespace MethodStore
             FilterText = string.Empty;
         }
 
-        private void ShowFormObjectMethod(int? id = null)
+        private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
-            WindowObjectMethod formObject = new WindowObjectMethod(id)
+            WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
             {
                 Owner = this
             };

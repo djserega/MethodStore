@@ -53,7 +53,7 @@ namespace MethodStore
             return new DirectoryInfo(_pathDataFiles).GetFiles().ToList();
         }
 
-        internal ObjectMethod GetFileObjectMethods(int? id = null)
+        internal ObjectMethod GetFileObjectMethods(Guid id)
         {
             ObjectMethod refObject = null;
 
@@ -62,27 +62,17 @@ namespace MethodStore
             if (listFiles == null)
                 return refObject;
 
-            int idObject = 1;
-
-            if (listFiles.Count > 0)
-            {
-                listFiles.Sort((a, b) => string.Compare(b.Name, a.Name));
-                //listFiles.Sort((a, b) => DateTime.Compare(b.LastWriteTimeUtc, a.LastWriteTimeUtc));
-                //listFiles.Sort((a, b) => Compare(a, b));
-                idObject = int.Parse(listFiles.First().Name.Replace(".json", string.Empty));
-                idObject++;
-            }
-
             Json json = new Json();
 
-            FileInfo fileObject = new FileInfo(GetFileNameObjectMethod(idObject));
+            FileInfo fileObject = new FileInfo(GetFileNameObjectMethod(id));
             if (!fileObject.Exists)
             {
                 json.SerializeObjectMethod(fileObject, new ObjectMethod());
             }
 
             refObject = json.DeserialiseObjectMethod(fileObject);
-            refObject.ID = idObject;
+            refObject.ID = id;
+            refObject.Path = fileObject.FullName;
 
             return refObject;
         }
@@ -94,7 +84,7 @@ namespace MethodStore
                  (int.Parse(a.Name.Replace(".json", string.Empty)));
         }
 
-        internal void SaveObjectMethods(int id, ObjectMethod objectMethod)
+        internal void SaveObjectMethods(Guid id, ObjectMethod objectMethod)
         {
             if (!CreatePathDataFiles())
                 return;
@@ -102,11 +92,16 @@ namespace MethodStore
             new Json().SerializeObjectMethod(new FileInfo(GetFileNameObjectMethod(id)), objectMethod);
         }
 
-        private string GetFileNameObjectMethod(int id)
+        private string GetFileNameObjectMethod(Guid id)
         {
             return Path.Combine(
                 _pathDataFiles,
                 $"{id.ToString()}.json");
+        }
+
+        internal void Delete(string path)
+        {
+            new FileInfo(path).Delete();
         }
     }
 }

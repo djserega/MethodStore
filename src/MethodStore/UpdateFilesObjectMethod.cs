@@ -9,17 +9,17 @@ namespace MethodStore
 {
     internal class UpdateFilesObjectMethod
     {
-        internal int? Id { get; private set; }
+        internal Guid Id { get; private set; }
         internal ObjectMethod RefObjectMethod { get; private set; }
 
         internal UpdateFilesObjectMethod()
         {
         }
-        internal UpdateFilesObjectMethod(int? id)
+        internal UpdateFilesObjectMethod(Guid id)
         {
             Id = id;
         }
-        internal UpdateFilesObjectMethod(int id, ObjectMethod objectMethod)
+        internal UpdateFilesObjectMethod(Guid id, ObjectMethod objectMethod)
         {
             Id = id;
             RefObjectMethod = objectMethod;
@@ -50,7 +50,7 @@ namespace MethodStore
 
         internal void Save()
         {
-            new DirFile().SaveObjectMethods((int)Id, RefObjectMethod);
+            new DirFile().SaveObjectMethods(Id, RefObjectMethod);
         }
 
     }

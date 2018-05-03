@@ -20,20 +20,24 @@ namespace MethodStore
     /// </summary>
     public partial class WindowObjectMethod : MetroWindow
     {
-        internal int ID { get; private set; }
+        internal Guid ID { get; private set; }
         private ObjectMethod _ref;
+        private bool _isNewObject;
 
-        public WindowObjectMethod(int? id = null)
+        public WindowObjectMethod(Guid id, bool isNewObject = false)
         {
+            _isNewObject = isNewObject;
+
             InitializeComponent();
 
             _ref = new UpdateFilesObjectMethod(id).Get();
 
             ID = _ref.ID;
 
+            if (_isNewObject)
+                GetTextInClipboard();
+
             DataContext = _ref;
-                                       
-            Title += " (новый)";
         }
 
         private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
@@ -50,7 +54,40 @@ namespace MethodStore
         {
             _ref.DateEdited = DateTime.Now;
             new UpdateFilesObjectMethod(ID, _ref).Save();
+            _isNewObject = false;
             Close();
+        }
+
+        private void GetTextInClipboard()
+        {
+            string textClipboard = Clipboard.GetText();
+
+            if (string.IsNullOrWhiteSpace(textClipboard))
+                return;
+
+            int positionDot = textClipboard.IndexOf('.');
+
+            if (positionDot > 0)
+            {
+                _ref.Module = new string(textClipboard.Take(positionDot).ToArray());
+
+                string tempModule = _ref.Module + ".";
+                textClipboard = textClipboard.TrimStart(tempModule.ToCharArray());
+
+                int positionBracket = textClipboard.IndexOf("(");
+                if (positionBracket > 0)
+                    _ref.MethodName = new string(textClipboard.Take(positionBracket).ToArray());
+                else
+                    _ref.MethodName = textClipboard;
+            }
+            else
+                TextBoxClipBoard.Text = textClipboard;
+        }
+
+        private void FormObjectMethod_Closed(object sender, EventArgs e)
+        {
+            if (_isNewObject)
+                new DirFile().Delete(_ref.Path);
         }
     }
 }
