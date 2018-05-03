@@ -37,6 +37,28 @@
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
+                    <Label Content="Вызов метода" MinWidth="90"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding Path=MethodInvokationString, Mode=OneWay}" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
+                                 Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='143'}"/>
+                        <Button x:Name="ButtonCopyToClipBoard" Content="Copy" Background="LightSteelBlue" BorderBrush="Teal" 
+                                Click="ButtonCopyToClipBoard_Click">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="FontWeight" Value="ExtraBold"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal">
                     <Label Content="Модуль" MinWidth="90"/>
                     <TextBox Text="{Binding Path=Module}" Background="LightSteelBlue" BorderBrush="Teal"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
@@ -100,7 +122,7 @@
 
                 <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Visibility="Collapsed">
                     <Label Content="Параметры" MinWidth="90"/>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
@@ -128,9 +150,9 @@
 
                 <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="StackPanelClipboard" Orientation="Horizontal">
                     <Label Content="Буфер обмена" MinWidth="90"/>
-                    <TextBox x:Name="TextBoxClipBoard" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
+                    <TextBox x:Name="TextBoxClipboard" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
                 </StackPanel>
 

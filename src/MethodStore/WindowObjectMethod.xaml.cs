@@ -79,15 +79,24 @@ namespace MethodStore
                     _ref.MethodName = new string(textClipboard.Take(positionBracket).ToArray());
                 else
                     _ref.MethodName = textClipboard;
+                StackPanelClipboard.Visibility = Visibility.Collapsed;
             }
             else
-                TextBoxClipBoard.Text = textClipboard;
+            {
+                TextBoxClipboard.Text = textClipboard;
+                StackPanelClipboard.Visibility = Visibility.Visible;
+            }
         }
 
         private void FormObjectMethod_Closed(object sender, EventArgs e)
         {
             if (_isNewObject)
                 new DirFile().Delete(_ref.Path);
+        }
+
+        private void ButtonCopyToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(_ref.MethodInvokationString);
         }
     }
 }
