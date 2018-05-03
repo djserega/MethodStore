@@ -20,24 +20,39 @@ namespace MethodStore
     /// </summary>
     public partial class WindowObjectMethod : MetroWindow
     {
+        internal int ID { get; private set; }
         private ObjectMethod _ref;
 
-        public WindowObjectMethod()
+        public WindowObjectMethod(int? id = null)
         {
             InitializeComponent();
 
-            _ref = new ObjectMethod()
-            {
-                DateCreation = DateTime.Now,
-                Description = "Установка активного элемента на первом не заполненном реквизите",
-                MethodName = "УстановитьТекущийЭлементФормы",
-                Module = "ParfumsОбщегоНазначенияКлиентСервер",
-                DateEdited = DateTime.Now
-            };
+            _ref = new UpdateFilesObjectMethod(id).GetObjectMethod();
+
+            ID = _ref.ID;
+
+            //_ref = new ObjectMethod()
+            //{
+            //    DateCreation = DateTime.Now,
+            //    Description = "Установка активного элемента на первом не заполненном реквизите",
+            //    MethodName = "УстановитьТекущийЭлементФормы",
+            //    Module = "ParfumsОбщегоНазначенияКлиентСервер",
+            //    DateEdited = DateTime.Now
+            //};
 
             DataContext = _ref;
                                        
             Title += " (новый)";
+        }
+
+        private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonDeleteParameter_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

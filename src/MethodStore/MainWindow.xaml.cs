@@ -147,21 +147,12 @@ namespace MethodStore
 
         private void ButtonAddMethod_Click(object sender, RoutedEventArgs e)
         {
-            _dataMethods.Add(new ObjectMethod()
-            {
-                Description = "new object " + DateTime.Now.ToString(),
-                DateEdited = DateTime.Now
-            });
-
-            WindowObjectMethod formObject = new WindowObjectMethod();
-            formObject.ShowDialog();
-
-            _refreshDataGrid.EvokeRefreshDataGrid();
+            ShowFormObjectMethod();
         }
 
         private void ButtonEditMethod_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowFormObjectMethod();
         }
 
         #endregion
@@ -226,6 +217,17 @@ namespace MethodStore
         private void ButtonClearFilter_Click(object sender, RoutedEventArgs e)
         {
             FilterText = string.Empty;
+        }
+
+        private void ShowFormObjectMethod(int? id = null)
+        {
+            WindowObjectMethod formObject = new WindowObjectMethod(id)
+            {
+                Owner = this
+            };
+            formObject.ShowDialog();
+
+            _refreshDataGrid.EvokeRefreshDataGrid();
         }
     }
 }

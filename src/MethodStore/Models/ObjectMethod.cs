@@ -8,6 +8,7 @@ namespace MethodStore
 {
     public class ObjectMethod
     {
+        public int ID { get; set; }
         public string Module { get; set; }
         public string MethodName { get; set; }
         public Parameter[] Parameters { get; set; }

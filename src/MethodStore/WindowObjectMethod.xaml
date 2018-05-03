@@ -9,6 +9,15 @@
         x:Name="FormObjectMethod"
         Title="WindowObjectMethod" Height="400" Width="600"
         Background="Teal">
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="LightSteelBlue"/>
+            <Setter Property="BorderBrush" Value="Teal"/>
+        </Style>
+        <Style x:Key="DataGridStyleRow" BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="LightSteelBlue"/>
+        </Style>
+    </Controls:MetroWindow.Resources>
     <Grid>
         <Separator Height="5" Background="{x:Null}"/>
         <StackPanel Orientation="Horizontal">
@@ -18,7 +27,9 @@
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Separator Width="1" Background="{x:Null}"/>
                     <Button x:Name="Save" Content="Записать" Background="LightSteelBlue"/>
+                    <Separator Width="1" Background="{x:Null}"/>
                 </StackPanel>
                 
                 <Separator Height="1" Background="{x:Null}"/>
@@ -57,6 +68,34 @@
                     <Label Content="Создано" MinWidth="90"/>
                     <DatePicker Text="{Binding Path=DateCreation}" Background="LightSteelBlue" BorderBrush="Teal"/>
                     
+                </StackPanel>
+                
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Параметры" MinWidth="90"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Separator Width="1" Background="{x:Null}"/>
+                            <Button x:Name="ButtobAddParameter" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
+                                    Click="ButtobAddParameter_Click"/>
+                            <Separator Width="1" Background="{x:Null}"/>
+                            <Button x:Name="ButtonDeleteParameter" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal"
+                                    Click="ButtonDeleteParameter_Click"/>
+                            <Separator Width="1" Background="{x:Null}"/>
+                        </StackPanel>
+                        <Separator Height="0" Background="{x:Null}"/>
+                        <DataGrid x:Name="DataGridParameters" Background="LightSteelBlue" ItemsSource="{Binding _dataParameters}" AutoGenerateColumns="False" HorizontalAlignment="Left"
+                                  ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
+                                  RowStyle="{StaticResource DataGridStyleRow}"
+                                  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </StackPanel>
                 
                 <Separator Height="1" Background="{x:Null}"/>
