@@ -36,7 +36,7 @@ namespace MethodStore
                 }
             }
         }
-        public string MethodInvokationString { get; private set; }
+        public string MethodInvokationString { get; set; }
         public Parameter[] Parameters { get; set; }
         public string Description { get; set; }
         public DateTime DateCreation { get; set; }

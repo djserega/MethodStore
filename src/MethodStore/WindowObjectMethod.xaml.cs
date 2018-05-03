@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +98,16 @@ namespace MethodStore
         private void ButtonCopyToClipBoard_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(_ref.MethodInvokationString);
+        }
+
+        private void TextBoxModule_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
+        }
+
+        private void TextBoxMethodName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
         }
     }
 }

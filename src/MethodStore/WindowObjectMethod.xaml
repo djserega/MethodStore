@@ -39,7 +39,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Вызов метода" MinWidth="90"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding Path=MethodInvokationString, Mode=OneWay}" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
+                        <TextBox x:Name="TextBoxMethodInvokationString" Text="{Binding Path=MethodInvokationString}" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
                                  Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='143'}"/>
                         <Button x:Name="ButtonCopyToClipBoard" Content="Copy" Background="LightSteelBlue" BorderBrush="Teal" 
                                 Click="ButtonCopyToClipBoard_Click">
@@ -60,16 +60,18 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Модуль" MinWidth="90"/>
-                    <TextBox Text="{Binding Path=Module}" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
+                    <TextBox x:Name="TextBoxModule" Text="{Binding Path=Module, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal" 
+                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
+                             TextChanged="TextBoxModule_TextChanged"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Имя метода" MinWidth="90"/>
-                    <TextBox Text="{Binding Path=MethodName}" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
+                    <TextBox x:Name="TextBoxMethodName" Text="{Binding Path=MethodName, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal"
+                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
+                             TextChanged="TextBoxMethodName_TextChanged"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
@@ -150,7 +152,7 @@
 
                 <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel x:Name="StackPanelClipboard" Orientation="Horizontal">
+                <StackPanel x:Name="StackPanelClipboard" Orientation="Horizontal" Visibility="Collapsed">
                     <Label Content="Буфер обмена" MinWidth="90"/>
                     <TextBox x:Name="TextBoxClipboard" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
