@@ -106,11 +106,9 @@ namespace MethodStore
             InitializeComponent();
 
             _refreshDataGrid = new RefreshDataGridEvents();
-            _dataMethods = new UpdateFilesObjectMethod().GetListObjectMethod();
+            _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
 
             DataContext = this;
-
-            _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
         }
 
         private void MainWindowMethodStore_Loaded(object sender, RoutedEventArgs e)
@@ -168,6 +166,8 @@ namespace MethodStore
         {
             if (!_formLoaded)
                 return;
+
+            _dataMethods = new UpdateFilesObjectMethod().GetListObjectMethod();
 
             string textFilter = TextBoxFilter.Text;
 

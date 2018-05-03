@@ -66,7 +66,9 @@ namespace MethodStore
 
             if (listFiles.Count > 0)
             {
-                listFiles.Sort((a, b) => string.Compare(a.Name, b.Name));
+                listFiles.Sort((a, b) => string.Compare(b.Name, a.Name));
+                idObject = int.Parse(listFiles.First().Name.Replace(".json", string.Empty));
+                idObject++;
             }
 
             string pathObject = Path.Combine(
