@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="MainWindowMethodStore"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Хранилище методов" Height="450" Width="1500"
         Background="Teal"
         Loaded="MainWindowMethodStore_Loaded">
     <Controls:MetroWindow.Resources>
@@ -76,11 +76,11 @@
                           RowStyle="{StaticResource DataGridStyleRow}"
                           Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}" IsTextSearchEnabled="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="150"/>
-                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="150"/>
-                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="250"/>
-                        <DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
-                        <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
+                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MaxWidth="400" MinWidth="250"/>
+                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MaxWidth="400" MinWidth="250"/>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MaxWidth="600" MinWidth="350"/>
+                        <!--<DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
+                        <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
 

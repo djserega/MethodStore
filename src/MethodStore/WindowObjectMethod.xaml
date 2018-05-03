@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="WindowObjectMethod" Height="400" Width="600"
+        Title="Метод" Height="400" Width="600"
         Background="Teal"
         Closed="FormObjectMethod_Closed">
     <Controls:MetroWindow.Resources>
