@@ -41,6 +41,12 @@ namespace MethodStore
             typeof(MainWindow),
             new UIPropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty _filterTypeMethods = DependencyProperty.Register(
+            "FilterTypeMethods",
+            typeof(bool),
+            typeof(MainWindow),
+            new UIPropertyMetadata(false));
+
         public static readonly DependencyProperty _filterModule = DependencyProperty.Register(
             "FilterModule",
             typeof(bool),
@@ -66,6 +72,15 @@ namespace MethodStore
             set
             {
                 SetValue(_filterText, value);
+                SetItemSourceDataGrid();
+            }
+        }
+        private bool FilterTypeMethods
+        {
+            get { return (bool)GetValue(_filterTypeMethods); }
+            set
+            {
+                SetValue(_filterTypeMethods, value);
                 SetItemSourceDataGrid();
             }
         }
@@ -113,6 +128,7 @@ namespace MethodStore
 
         private void MainWindowMethodStore_Loaded(object sender, RoutedEventArgs e)
         {
+            FilterTypeMethods = false;
             FilterModule = true;
             FilterMethodName = true;
             FilterDescription = true;
@@ -145,6 +161,11 @@ namespace MethodStore
 
         #region Checkbox Filter
 
+        private void CheckBoxTypeMethods_Click(object sender, RoutedEventArgs e)
+        {
+            SetItemSourceDataGrid();
+        }
+
         private void CheckBoxFilterDescription_Click(object sender, RoutedEventArgs e)
         {
             SetItemSourceDataGrid();
@@ -174,6 +195,11 @@ namespace MethodStore
 
             _dataMethods = new UpdateFilesObjectMethod().GetList();
 
+            DataGridData.ItemsSource = GetCollectionFilterItemSource();
+        }
+
+        private ICollectionView GetCollectionFilterItemSource()
+        {
             string textFilter = TextBoxFilter.Text.ToUpper();
 
             CollectionViewSource collectionSourceFilter = new CollectionViewSource() { Source = _dataMethods };
@@ -182,19 +208,19 @@ namespace MethodStore
 
             Predicate<object> objectFilter = null;
 
-            if (FilterModule || FilterMethodName || FilterDescription)
+            if (FilterTypeMethods || FilterModule || FilterMethodName || FilterDescription)
                 if (!string.IsNullOrWhiteSpace(textFilter))
                     objectFilter = new Predicate<object>(
                        item => (
-                                (FilterModule && ((ObjectMethod)item).Module.ToUpper().Contains(textFilter))
-                            ||  (FilterMethodName && ((ObjectMethod)item).MethodName.ToUpper().Contains(textFilter))
-                            ||  (FilterDescription && ((ObjectMethod)item).Description.ToUpper().Contains(textFilter))
+                               (FilterTypeMethods && (((ObjectMethod)item).TypeMethodName != null && ((ObjectMethod)item).TypeMethodName.ToUpper().Contains(textFilter)))
+                            || (FilterModule && ((ObjectMethod)item).Module.ToUpper().Contains(textFilter))
+                            || (FilterMethodName && ((ObjectMethod)item).MethodName.ToUpper().Contains(textFilter))
+                            || (FilterDescription && ((ObjectMethod)item).Description.ToUpper().Contains(textFilter))
                             )
                         );
 
             collectionFilter.Filter = objectFilter;
-
-            DataGridData.ItemsSource = collectionFilter;
+            return collectionFilter;
         }
 
         private void _refreshDataGrid_RefreshDataGrid()
@@ -223,5 +249,6 @@ namespace MethodStore
             if (DataGridData.SelectedItem is ObjectMethod objectMethod)
                 ShowFormObjectMethod(objectMethod.ID);
         }
+
     }
 }

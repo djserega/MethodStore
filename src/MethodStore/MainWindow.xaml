@@ -40,6 +40,10 @@
                     <Separator Width="5" Background="{x:Null}"/>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Тип поиска:"/>
+                        <Label Content="Тип модуля"/>
+                        <CheckBox x:Name="CheckBoxTypeMethods" Background="LightSteelBlue"
+                                  IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterTypeMethods}"
+                                  Click="CheckBoxTypeMethods_Click"/>
                         <Label Content="Модуль"/>
                         <CheckBox x:Name="CheckBoxFilterModule" Background="LightSteelBlue"
                                   IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterModule}"
