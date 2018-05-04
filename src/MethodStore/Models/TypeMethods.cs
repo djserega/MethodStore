@@ -23,5 +23,18 @@ namespace MethodStore
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is TypeMethods))
+                return false;
+
+            return ((TypeMethods)obj).Name == this.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
     }
 }
