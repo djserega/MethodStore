@@ -128,13 +128,15 @@ namespace MethodStore
         {
             List<TypeMethods> listTypeMethods = new List<TypeMethods>();
 
-            using (StreamReader reader = new StreamReader(fileInfo.FullName))
+            using (StreamReader reader = new StreamReader(fileInfo.FullName, Encoding.Default))
             {
                 while (!reader.EndOfStream)
                 {
                     listTypeMethods.Add(new TypeMethods(reader.ReadLine()));
                 }
             }
+
+            listTypeMethods.Sort((a, b) => string.Compare(a.Name, b.Name));
 
             return listTypeMethods;
         }
