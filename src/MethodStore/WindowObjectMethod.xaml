@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="Метод" Height="400" Width="600"
+        Title="Метод" Height="400" Width="750"
         Background="Teal"
         Loaded="FormObjectMethod_Loaded"
         Closed="FormObjectMethod_Closed">
@@ -164,9 +164,9 @@
                                   Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
                                   Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="90" MaxWidth="150"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="90" MaxWidth="150"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="300"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
