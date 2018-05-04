@@ -49,7 +49,7 @@ namespace MethodStore
             if (_isNewObject)
                 GetTextInClipboard();
             else
-                _dataParameters = _ref.Parameters.ToList();
+                _dataParameters = _ref.Parameters?.ToList();
 
             DataContext = _ref;
             
