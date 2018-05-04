@@ -74,17 +74,18 @@ namespace MethodStore
             Close();
         }
 
+        private void WindowCommandSaveObject_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveObjectAndClose();
+        }
+
         #endregion
 
         #region Button
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            _ref.DateEdited = DateTime.Now;
-            _ref.Parameters = _dataParameters.ToArray();
-            new UpdateFilesObjectMethod(ID, _ref).Save();
-            _isNewObject = false;
-            Close();
+            SaveObjectAndClose();
         }
 
         private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
@@ -202,6 +203,15 @@ namespace MethodStore
             DataGridParameters.CurrentColumn = (DataGridColumn)FormObjectMethod.FindName(columnName);
             DataGridParameters.CurrentCell = new DataGridCellInfo(newParameter, DataGridParameters.CurrentColumn);
             DataGridParameters.BeginEdit();
+        }
+
+        private void SaveObjectAndClose()
+        {
+            _ref.DateEdited = DateTime.Now;
+            _ref.Parameters = _dataParameters.ToArray();
+            new UpdateFilesObjectMethod(ID, _ref).Save();
+            _isNewObject = false;
+            Close();
         }
 
     }

@@ -13,13 +13,18 @@
         Closed="FormObjectMethod_Closed">
 
     <Controls:MetroWindow.CommandBindings>
-        <CommandBinding x:Name="WindowCommandCloseForm" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
+        <CommandBinding x:Name="WindowClose" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
+        <CommandBinding x:Name="SaveObject" Executed="WindowCommandSaveObject_Executed" Command="ApplicationCommands.Save"/>
     </Controls:MetroWindow.CommandBindings>
+
     <Controls:MetroWindow.InputBindings>
         <KeyBinding Key="Esc" Command="ApplicationCommands.Close"/>
+        <KeyBinding Key="Enter" Modifiers="Ctrl" Command="ApplicationCommands.Close"/>
     </Controls:MetroWindow.InputBindings>
     
     <Controls:MetroWindow.Resources>
+
+        <!--DataGrid-->
         <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="LightSteelBlue"/>
             <Setter Property="BorderBrush" Value="Teal"/>
@@ -27,6 +32,7 @@
         <Style x:Key="DataGridStyleRow" BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
+        
     </Controls:MetroWindow.Resources>
     
     <Grid>
@@ -187,4 +193,5 @@
         </StackPanel>
         <Separator Height="5" Background="{x:Null}"/>
     </Grid>
+
 </Controls:MetroWindow>
