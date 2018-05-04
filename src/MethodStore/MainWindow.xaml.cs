@@ -137,6 +137,11 @@ namespace MethodStore
             _refreshDataGrid.EvokeRefreshDataGrid();
         }
 
+        private void DataGridDataEnter_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenSelectedObjectMethod();
+        }
+
         #endregion
 
         #region Button
@@ -158,7 +163,7 @@ namespace MethodStore
 
         #endregion
 
-        #region Checkbox Filter
+        #region Filter (CheckBox, TextBox)
 
         private void CheckBoxTypeMethods_Click(object sender, RoutedEventArgs e)
         {
@@ -180,12 +185,12 @@ namespace MethodStore
             SetItemSourceDataGrid();
         }
 
-        #endregion
-
         private void TextBoxFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             SetItemSourceDataGrid();
         }
+
+        #endregion
 
         private void SetItemSourceDataGrid()
         {
@@ -229,13 +234,20 @@ namespace MethodStore
 
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
+            ObjectMethod objectMethod = DataGridData.SelectedItem as ObjectMethod;
+            if (objectMethod == null)
+                return;
+
             WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
             {
                 Owner = this
             };
             formObject.ShowDialog();
-
+            
             _refreshDataGrid.EvokeRefreshDataGrid();
+
+            //DataGridData.Focus();
+            //DataGridData.CurrentCell = new DataGridCellInfo(objectMethod, DataGridData.Columns[0]);
         }
 
         private void DataGridData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -255,5 +267,6 @@ namespace MethodStore
                 if (!string.IsNullOrWhiteSpace(objectMethod.MethodInvokationString))
                     Clipboard.SetText(objectMethod.MethodInvokationString);
         }
+
     }
 }
