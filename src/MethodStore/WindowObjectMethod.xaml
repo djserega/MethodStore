@@ -10,6 +10,14 @@
         Title="Метод" Height="400" Width="600"
         Background="Teal"
         Closed="FormObjectMethod_Closed">
+
+    <Controls:MetroWindow.CommandBindings>
+        <CommandBinding x:Name="WindowCommandCloseForm" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
+    </Controls:MetroWindow.CommandBindings>
+    <Controls:MetroWindow.InputBindings>
+        <KeyBinding Key="Esc" Command="ApplicationCommands.Close"/>
+    </Controls:MetroWindow.InputBindings>
+    
     <Controls:MetroWindow.Resources>
         <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="LightSteelBlue"/>
@@ -19,6 +27,7 @@
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
     </Controls:MetroWindow.Resources>
+    
     <Grid>
         <Separator Height="5" Background="{x:Null}"/>
         <StackPanel Orientation="Horizontal">

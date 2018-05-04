@@ -131,5 +131,10 @@ namespace MethodStore
                 if (comboBox.SelectedItem is TypeMethods typeMethods)
                     _ref.TypeMethods = typeMethods;
         }
+
+        private void WindowCommandCloseForm_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
