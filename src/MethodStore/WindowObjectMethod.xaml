@@ -14,7 +14,7 @@
 
     <Controls:MetroWindow.CommandBindings>
         <CommandBinding x:Name="WindowClose" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
-        <CommandBinding x:Name="SaveObject" Executed="WindowCommandSaveObject_Executed" Command="ApplicationCommands.Save"/>
+        <CommandBinding x:Name="WindowSaveObject" Executed="WindowCommandSaveObject_Executed" Command="ApplicationCommands.Save"/>
     </Controls:MetroWindow.CommandBindings>
 
     <Controls:MetroWindow.InputBindings>
