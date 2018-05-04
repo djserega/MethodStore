@@ -21,14 +21,20 @@ namespace MethodStore
     /// </summary>
     public partial class WindowObjectMethod : MetroWindow
     {
-        private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
-
         internal Guid ID { get; private set; }
+
+        #region Fields
+
+        private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
 
         private bool _isNewObject;
         private ObjectMethod _ref;
         private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
         private List<Parameter> _dataParameters = new List<Parameter>();
+
+        #endregion
+
+        #region Event window
 
         public WindowObjectMethod(Guid id, bool isNewObject = false)
         {
@@ -57,9 +63,28 @@ namespace MethodStore
             _refreshDataGrid.EvokeRefreshDataGrid();
         }
 
-        private void _refreshDataGrid_RefreshDataGrid()
+        private void FormObjectMethod_Closed(object sender, EventArgs e)
         {
-            SetItemSourceDataGridParameters();
+            if (_isNewObject)
+                new DirFile().Delete(_ref.Path);
+        }
+
+        private void WindowCommandCloseForm_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
+
+        #endregion
+
+        #region Button
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            _ref.DateEdited = DateTime.Now;
+            _ref.Parameters = _dataParameters.ToArray();
+            new UpdateFilesObjectMethod(ID, _ref).Save();
+            _isNewObject = false;
+            Close();
         }
 
         private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
@@ -71,14 +96,6 @@ namespace MethodStore
             SetSelectedDataGridParameters(newParameter, "ParametersColumnName");
         }
 
-        private void SetSelectedDataGridParameters(Parameter newParameter, string columnName)
-        {
-            DataGridParameters.SelectedItem = newParameter;
-
-            DataGridParameters.Focus();
-            DataGridParameters.CurrentColumn = (DataGridColumn)FormObjectMethod.FindName(columnName);
-            DataGridParameters.BeginEdit();
-        }
 
         private void ButtonDeleteParameter_Click(object sender, RoutedEventArgs e)
         {
@@ -89,14 +106,35 @@ namespace MethodStore
             }
         }
 
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        private void ButtonCopyToClipBoard_Click(object sender, RoutedEventArgs e)
         {
-            _ref.DateEdited = DateTime.Now;
-            _ref.Parameters = _dataParameters.ToArray();
-            new UpdateFilesObjectMethod(ID, _ref).Save();
-            _isNewObject = false;
-            Close();
+            Clipboard.SetText(_ref.MethodInvokationString);
         }
+
+        #endregion
+
+        #region Event element
+
+        private void ComboBoxTypeMethods_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+                if (comboBox.SelectedItem is TypeMethods typeMethods)
+                    _ref.TypeMethods = typeMethods;
+        }
+
+        private void TextBoxModule_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
+        }
+
+        private void TextBoxMethodName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
+        }
+
+        #endregion
+
+        #region Clipboard
 
         private void GetTextInClipboard()
         {
@@ -128,26 +166,9 @@ namespace MethodStore
             }
         }
 
-        private void FormObjectMethod_Closed(object sender, EventArgs e)
-        {
-            if (_isNewObject)
-                new DirFile().Delete(_ref.Path);
-        }
+        #endregion
 
-        private void ButtonCopyToClipBoard_Click(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetText(_ref.MethodInvokationString);
-        }
-
-        private void TextBoxModule_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
-        }
-
-        private void TextBoxMethodName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBoxMethodInvokationString.Text = _ref.MethodInvokationString;
-        }
+        #region Type methods
 
         private async void ReadFileTypeMethods()
         {
@@ -160,22 +181,26 @@ namespace MethodStore
             return await Task.Run(() => new DirFile().GetListTypeMethods());
         }
 
-        private void ComboBoxTypeMethods_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is ComboBox comboBox)
-                if (comboBox.SelectedItem is TypeMethods typeMethods)
-                    _ref.TypeMethods = typeMethods;
-        }
+        #endregion
 
-        private void WindowCommandCloseForm_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void _refreshDataGrid_RefreshDataGrid()
         {
-            Close();
+            SetItemSourceDataGridParameters();
         }
 
         private void SetItemSourceDataGridParameters()
         {
             CollectionViewSource collectionSource = new CollectionViewSource() { Source = _dataParameters };
             DataGridParameters.ItemsSource = collectionSource.View;
+        }
+
+        private void SetSelectedDataGridParameters(Parameter newParameter, string columnName)
+        {
+            DataGridParameters.SelectedItem = newParameter;
+
+            DataGridParameters.Focus();
+            DataGridParameters.CurrentColumn = (DataGridColumn)FormObjectMethod.FindName(columnName);
+            DataGridParameters.BeginEdit();
         }
 
     }
