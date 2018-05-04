@@ -28,7 +28,7 @@ namespace MethodStore
 
         private bool _formLoaded;
 
-        private RefreshDataGridEvents _refreshDataGrid;
+        private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
         private List<ObjectMethod> _dataMethods;
 
         #endregion
@@ -120,7 +120,6 @@ namespace MethodStore
         {
             InitializeComponent();
 
-            _refreshDataGrid = new RefreshDataGridEvents();
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
 
             DataContext = this;
