@@ -250,5 +250,11 @@ namespace MethodStore
                 ShowFormObjectMethod(objectMethod.ID);
         }
 
+        private void MenuItemCopyToClipboard_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridData.SelectedItem is ObjectMethod objectMethod)
+                if (!string.IsNullOrWhiteSpace(objectMethod.MethodInvokationString))
+                    Clipboard.SetText(objectMethod.MethodInvokationString);
+        }
     }
 }

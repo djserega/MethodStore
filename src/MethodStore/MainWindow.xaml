@@ -89,6 +89,12 @@
                         <!--<DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
                         <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>-->
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu Background="Teal">
+                            <MenuItem x:Name="MenuItemCopyToClipboard" Header="Копировать строку вызова метода в буфер обмена" Background="LightSteelBlue"
+                                      Click="MenuItemCopyToClipboard_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
 
             </StackPanel>
