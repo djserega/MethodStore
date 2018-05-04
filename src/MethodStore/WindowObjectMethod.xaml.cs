@@ -21,11 +21,14 @@ namespace MethodStore
     /// </summary>
     public partial class WindowObjectMethod : MetroWindow
     {
+        private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
+
         internal Guid ID { get; private set; }
 
-        private ObjectMethod _ref;
         private bool _isNewObject;
+        private ObjectMethod _ref;
         private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
+        private List<Parameter> _dataParameters = new List<Parameter>();
 
         public WindowObjectMethod(Guid id, bool isNewObject = false)
         {
@@ -39,25 +42,57 @@ namespace MethodStore
 
             if (_isNewObject)
                 GetTextInClipboard();
+            else
+                _dataParameters = _ref.Parameters.ToList();
 
             DataContext = _ref;
+            
+            _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
 
             ReadFileTypeMethods();
         }
 
+        private void FormObjectMethod_Loaded(object sender, RoutedEventArgs e)
+        {
+            _refreshDataGrid.EvokeRefreshDataGrid();
+        }
+
+        private void _refreshDataGrid_RefreshDataGrid()
+        {
+            SetItemSourceDataGridParameters();
+        }
+
         private void ButtobAddParameter_Click(object sender, RoutedEventArgs e)
         {
+            Parameter newParameter = new Parameter();
 
+            _dataParameters.Add(newParameter);
+            SetItemSourceDataGridParameters();
+            SetSelectedDataGridParameters(newParameter, "ParametersColumnName");
+        }
+
+        private void SetSelectedDataGridParameters(Parameter newParameter, string columnName)
+        {
+            DataGridParameters.SelectedItem = newParameter;
+
+            DataGridParameters.Focus();
+            DataGridParameters.CurrentColumn = (DataGridColumn)FormObjectMethod.FindName(columnName);
+            DataGridParameters.BeginEdit();
         }
 
         private void ButtonDeleteParameter_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DataGridParameters.SelectedItem is Parameter parameter)
+            {
+                _dataParameters.Remove(parameter);
+                SetItemSourceDataGridParameters();
+            }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             _ref.DateEdited = DateTime.Now;
+            _ref.Parameters = _dataParameters.ToArray();
             new UpdateFilesObjectMethod(ID, _ref).Save();
             _isNewObject = false;
             Close();
@@ -136,5 +171,12 @@ namespace MethodStore
         {
             Close();
         }
+
+        private void SetItemSourceDataGridParameters()
+        {
+            CollectionViewSource collectionSource = new CollectionViewSource() { Source = _dataParameters };
+            DataGridParameters.ItemsSource = collectionSource.View;
+        }
+
     }
 }
