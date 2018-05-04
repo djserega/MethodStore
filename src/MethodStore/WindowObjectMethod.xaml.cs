@@ -118,9 +118,6 @@ namespace MethodStore
         {
             _listTypeMethods = await ReadFileTypeMethodsAsync();
             ComboBoxTypeMethods.ItemsSource = _listTypeMethods;
-
-            if (!_isNewObject)
-                ComboBoxTypeMethods.SelectedItem = _ref.TypeMethods;
         }
 
         private async Task<List<TypeMethods>> ReadFileTypeMethodsAsync()

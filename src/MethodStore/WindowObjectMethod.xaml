@@ -61,6 +61,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Тип метода" MinWidth="90"/>
                     <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
+                              SelectedItem="{Binding Path=TypeMethods}"
                               Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" 
                               SelectionChanged="ComboBoxTypeMethods_SelectionChanged"/>
                 </StackPanel>
