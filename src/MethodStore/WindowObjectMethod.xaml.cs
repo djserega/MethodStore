@@ -200,6 +200,7 @@ namespace MethodStore
 
             DataGridParameters.Focus();
             DataGridParameters.CurrentColumn = (DataGridColumn)FormObjectMethod.FindName(columnName);
+            DataGridParameters.CurrentCell = new DataGridCellInfo(newParameter, DataGridParameters.CurrentColumn);
             DataGridParameters.BeginEdit();
         }
 
