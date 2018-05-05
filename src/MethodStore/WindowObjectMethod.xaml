@@ -10,7 +10,8 @@
         Title="Метод" Height="400" Width="750"
         Background="Teal"
         Loaded="FormObjectMethod_Loaded"
-        Closed="FormObjectMethod_Closed">
+        Closed="FormObjectMethod_Closed"
+        LocationChanged="FormObjectMethod_LocationChanged">
 
     <Controls:MetroWindow.CommandBindings>
         <CommandBinding x:Name="WindowClose" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
@@ -88,7 +89,7 @@
                     <Label Content="Модуль" MinWidth="90"/>
                     <TextBox x:Name="TextBoxModule" Text="{Binding Path=Module, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal" 
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
-                             TextChanged="TextBoxModule_TextChanged"/>
+                             TextChanged="TextBoxModule_TextChanged" TabIndex="0"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
@@ -97,7 +98,7 @@
                     <Label Content="Имя метода" MinWidth="90"/>
                     <TextBox x:Name="TextBoxMethodName" Text="{Binding Path=MethodName, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal"
                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
-                             TextChanged="TextBoxMethodName_TextChanged"/>
+                             TextChanged="TextBoxMethodName_TextChanged" TabIndex="1"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
@@ -105,7 +106,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Описание" MinWidth="90"/>
                     <TextBox Text="{Binding Path=Description}" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"/>
+                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" TabIndex="2"/>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
@@ -156,7 +157,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Separator Width="1" Background="{x:Null}"/>
                             <Button x:Name="ButtobAddParameter" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
-                                    Click="ButtobAddParameter_Click"/>
+                                    Click="ButtobAddParameter_Click" TabIndex="3"/>
                             <Separator Width="1" Background="{x:Null}"/>
                             <Button x:Name="ButtonDeleteParameter" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal"
                                     Click="ButtonDeleteParameter_Click"/>

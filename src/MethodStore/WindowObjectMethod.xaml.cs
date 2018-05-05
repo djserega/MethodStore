@@ -32,6 +32,12 @@ namespace MethodStore
         private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
         private List<Parameter> _dataParameters = new List<Parameter>();
 
+        private MainWindow _owner;
+        private double _minLeft;
+        private double _maxLeft;
+        private double _minTop;
+        private double _maxTop;
+
         #endregion
 
         #region Event window
@@ -60,6 +66,16 @@ namespace MethodStore
 
         private void FormObjectMethod_Loaded(object sender, RoutedEventArgs e)
         {
+            _owner = (MainWindow)Owner;
+            _minLeft = _owner.Left + 10;
+            _maxLeft = _owner.Left + _owner.Width - 10 - Width;
+            _minTop = _owner.Top + 10;
+            _maxTop = _owner.Top + _owner.Height - 10 - Height;
+
+            SetPositionWindow(true);
+
+            TextBoxModule.Focus();
+
             _refreshDataGrid.EvokeRefreshDataGrid();
         }
 
@@ -67,6 +83,11 @@ namespace MethodStore
         {
             if (_isNewObject)
                 new DirFile().Delete(_ref.Path);
+        }
+
+        private void FormObjectMethod_LocationChanged(object sender, EventArgs e)
+        {
+            SetPositionWindow();
         }
 
         private void WindowCommandCloseForm_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -183,6 +204,19 @@ namespace MethodStore
         }
 
         #endregion
+
+        private void SetPositionWindow(bool loaded = false)
+        {
+            if (Left < _minLeft || loaded)
+                Left = _minLeft;
+            else if (Left > _maxLeft)
+                Left = _maxLeft;
+
+            if (Top < _minTop || loaded)
+                Top = _minTop;
+            else if (Top > _maxTop)
+                Top = _maxTop;
+        }
 
         private void _refreshDataGrid_RefreshDataGrid()
         {
