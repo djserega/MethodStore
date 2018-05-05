@@ -22,7 +22,7 @@
         <KeyBinding Key="Esc" Command="ApplicationCommands.Close"/>
         <KeyBinding Key="Enter" Modifiers="Ctrl" Command="ApplicationCommands.Close"/>
     </Controls:MetroWindow.InputBindings>
-    
+
     <Controls:MetroWindow.Resources>
 
         <!--DataGrid-->
@@ -33,9 +33,9 @@
         <Style x:Key="DataGridStyleRow" BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
-        
+
     </Controls:MetroWindow.Resources>
-    
+
     <Grid>
         <Separator Height="5" Background="{x:Null}"/>
         <StackPanel Orientation="Horizontal">
@@ -78,7 +78,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Тип метода" MinWidth="90"/>
                     <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
-                              SelectedItem="{Binding Path=TypeMethods}"
+                              SelectedItem="{Binding Path=TypeMethods}" 
                               Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" 
                               SelectionChanged="ComboBoxTypeMethods_SelectionChanged">
                         <ComboBox.GroupStyle>
