@@ -9,20 +9,25 @@ namespace MethodStore
     public class TypeMethods
     {
         public string Name { get; set; }
+        public string GroupName { get; set; }
 
         public TypeMethods()
         {
         }
 
-        public TypeMethods(string name)
+        public TypeMethods(string name, string groupName = "")
         {
             Name = name;
+            GroupName = groupName;
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        //public override string ToString()
+        //{
+        //    if (!string.IsNullOrWhiteSpace(GroupName))
+        //        return GroupName;
+        //    else
+        //        return Name;
+        //}
 
         public override bool Equals(object obj)
         {

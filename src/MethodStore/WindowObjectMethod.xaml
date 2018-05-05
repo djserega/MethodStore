@@ -80,7 +80,22 @@
                     <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
                               SelectedItem="{Binding Path=TypeMethods}"
                               Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" 
-                              SelectionChanged="ComboBoxTypeMethods_SelectionChanged"/>
+                              SelectionChanged="ComboBoxTypeMethods_SelectionChanged">
+                        <ComboBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ComboBox.GroupStyle>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>

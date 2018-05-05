@@ -139,7 +139,20 @@ namespace MethodStore
             {
                 while (!reader.EndOfStream)
                 {
-                    listTypeMethods.Add(new TypeMethods(reader.ReadLine()));
+                    string textInLine = reader.ReadLine();
+
+                    string groupName = "<Без категории>";
+                    string typeName = string.Empty;
+
+                    int indexSemicolon = textInLine.IndexOf(';');
+                    if (indexSemicolon == -1)
+                        typeName = textInLine;
+                    else
+                    {
+                        groupName = textInLine.Substring(0, indexSemicolon);
+                        typeName = textInLine.Substring(indexSemicolon + 1);
+                    }
+                    listTypeMethods.Add(new TypeMethods(typeName, groupName));
                 }
             }
 

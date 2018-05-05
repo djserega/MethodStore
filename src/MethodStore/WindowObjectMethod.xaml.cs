@@ -202,7 +202,11 @@ namespace MethodStore
         private async void ReadFileTypeMethods()
         {
             _listTypeMethods = await ReadFileTypeMethodsAsync();
-            ComboBoxTypeMethods.ItemsSource = _listTypeMethods;
+
+            ListCollectionView collectionView = new ListCollectionView(_listTypeMethods);
+            collectionView.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
+
+            ComboBoxTypeMethods.ItemsSource = collectionView;
         }
 
         private async Task<List<TypeMethods>> ReadFileTypeMethodsAsync()
