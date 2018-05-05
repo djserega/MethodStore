@@ -15,6 +15,10 @@ namespace MethodStore
         private string _pathDataFiles;
         private string _fullNameFile;
 
+        internal string PathData { get { return _pathData; } }
+        internal string PathDataFiles { get { return _pathDataFiles; } }
+
+
         internal DirFile()
         {
             _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -58,7 +62,10 @@ namespace MethodStore
             if (!CreatePathDataFiles())
                 return null;
 
-            return new DirectoryInfo(_pathDataFiles).GetFiles().ToList();
+            List<FileInfo> listFiles = new DirectoryInfo(_pathDataFiles).GetFiles().ToList();
+            listFiles.Sort((a, b) => b.LastWriteTimeUtc.CompareTo(a.LastWriteTimeUtc));
+
+            return listFiles;
         }
 
         internal ObjectMethod GetFileObjectMethods(Guid id)
