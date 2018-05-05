@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="Метод" Height="400" Width="750"
+        Title="Метод" Height="400" Width="950"
         Background="Teal"
         Loaded="FormObjectMethod_Loaded"
         Closed="FormObjectMethod_Closed"
@@ -127,6 +127,36 @@
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
+                    <Label Content="Параметры" MinWidth="90"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Separator Width="1" Background="{x:Null}"/>
+                            <Button x:Name="ButtobAddParameter" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
+                                    Click="ButtobAddParameter_Click" TabIndex="3"/>
+                            <Separator Width="1" Background="{x:Null}"/>
+                            <Button x:Name="ButtonDeleteParameter" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal"
+                                    Click="ButtonDeleteParameter_Click"/>
+                            <Separator Width="1" Background="{x:Null}"/>
+                        </StackPanel>
+                        <Separator Height="0" Background="{x:Null}"/>
+                        <DataGrid x:Name="DataGridParameters" Background="LightSteelBlue" CanUserAddRows="False" CanUserDeleteRows="False"
+                                  AutoGenerateColumns="False" HorizontalAlignment="Left"
+                                  ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
+                                  RowStyle="{StaticResource DataGridStyleRow}"
+                                  Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
+                                  Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="150"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="150" MaxWidth="250"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="250" MaxWidth="500"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </StackPanel>
+
+                <Separator Height="1" Background="{x:Null}"/>
+
+                <StackPanel Orientation="Horizontal">
 
                     <Label Content="Изменено" MinWidth="90"/>
                     <DatePicker Text="{Binding Path=DateEdited}" Background="LightSteelBlue" BorderBrush="Teal">
@@ -162,36 +192,6 @@
                         </DatePicker.Resources>
                     </DatePicker>
 
-                </StackPanel>
-
-                <Separator Height="1" Background="{x:Null}"/>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Параметры" MinWidth="90"/>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Separator Width="1" Background="{x:Null}"/>
-                            <Button x:Name="ButtobAddParameter" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
-                                    Click="ButtobAddParameter_Click" TabIndex="3"/>
-                            <Separator Width="1" Background="{x:Null}"/>
-                            <Button x:Name="ButtonDeleteParameter" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal"
-                                    Click="ButtonDeleteParameter_Click"/>
-                            <Separator Width="1" Background="{x:Null}"/>
-                        </StackPanel>
-                        <Separator Height="0" Background="{x:Null}"/>
-                        <DataGrid x:Name="DataGridParameters" Background="LightSteelBlue" CanUserAddRows="False" CanUserDeleteRows="False"
-                                  AutoGenerateColumns="False" HorizontalAlignment="Left"
-                                  ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
-                                  RowStyle="{StaticResource DataGridStyleRow}"
-                                  Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
-                                  Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="90" MaxWidth="150"/>
-                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="90" MaxWidth="150"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="300"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
