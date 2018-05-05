@@ -235,8 +235,6 @@ namespace MethodStore
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
             ObjectMethod objectMethod = DataGridData.SelectedItem as ObjectMethod;
-            if (objectMethod == null)
-                return;
 
             WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
             {
