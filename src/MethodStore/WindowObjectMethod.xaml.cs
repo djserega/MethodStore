@@ -167,32 +167,9 @@ namespace MethodStore
 
         private void GetTextInClipboard()
         {
-            string textClipboard = Clipboard.GetText();
-
-            if (string.IsNullOrWhiteSpace(textClipboard))
-                return;
-
-            int positionDot = textClipboard.IndexOf('.');
-
-            if (positionDot > 0)
-            {
-                _ref.Module = new string(textClipboard.Take(positionDot).ToArray());
-
-                string tempModule = _ref.Module + ".";
-                textClipboard = textClipboard.TrimStart(tempModule.ToCharArray());
-
-                int positionBracket = textClipboard.IndexOf("(");
-                if (positionBracket > 0)
-                    _ref.MethodName = new string(textClipboard.Take(positionBracket).ToArray());
-                else
-                    _ref.MethodName = textClipboard;
-                StackPanelClipboard.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                TextBoxClipboard.Text = textClipboard;
-                StackPanelClipboard.Visibility = Visibility.Visible;
-            }
+            new TextParser().ParseClipboardToModuleAndMethodName(_ref);
+            _dataParameters = _ref.Parameters.ToList();
+            SetItemSourceDataGridParameters();
         }
 
         #endregion
