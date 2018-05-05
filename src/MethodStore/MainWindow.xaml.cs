@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,8 @@ namespace MethodStore
 
         private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
         private List<ObjectMethod> _dataMethods;
+        private CallUpdateListObjectMethodsEvents _callUpdate = new CallUpdateListObjectMethodsEvents();
+        private SubscriberWatcher _subscriberWatcher;
 
         #endregion
 
@@ -121,6 +124,9 @@ namespace MethodStore
             InitializeComponent();
 
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
+            _callUpdate.CallUpdateListObjectMethods += _callUpdate_CallUpdateListObjectMethods;
+
+            _subscriberWatcher = new SubscriberWatcher(_callUpdate);
 
             DataContext = this;
         }
@@ -232,20 +238,27 @@ namespace MethodStore
             SetItemSourceDataGrid();
         }
 
+        private void _callUpdate_CallUpdateListObjectMethods(bool NeedNotified)
+        {
+            Dispatcher.Invoke(new ThreadStart(delegate 
+            {
+                try
+                {
+                    SetItemSourceDataGrid();
+                }
+                catch (Exception)
+                {
+                }
+            }));
+        }
+
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
-            ObjectMethod objectMethod = DataGridData.SelectedItem as ObjectMethod;
-
             WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
             {
                 Owner = this
             };
             formObject.ShowDialog();
-            
-            _refreshDataGrid.EvokeRefreshDataGrid();
-
-            //DataGridData.Focus();
-            //DataGridData.CurrentCell = new DataGridCellInfo(objectMethod, DataGridData.Columns[0]);
         }
 
         private void DataGridData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
