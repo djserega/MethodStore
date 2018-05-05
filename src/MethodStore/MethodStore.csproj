@@ -69,6 +69,7 @@
     <Compile Include="DirFile.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="Models\TypeMethods.cs" />
+    <Compile Include="SubscriberWatcher.cs" />
     <Compile Include="UpdateFilesObjectMethod.cs" />
     <Compile Include="WindowObjectMethod.xaml.cs">
       <DependentUpon>WindowObjectMethod.xaml</DependentUpon>
