@@ -23,14 +23,18 @@ namespace MethodStore
     {
         internal Guid ID { get; private set; }
 
-        #region Fields
+        #region Events
 
         private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
+
+        #endregion
+
+        #region Fields
 
         private bool _isNewObject;
         private ObjectMethod _ref;
         private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
-        private List<Parameter> _dataParameters = new List<Parameter>();
+        private List<Parameter> _dataParameters;
 
         private MainWindow _owner;
         private double _minLeft;
@@ -57,8 +61,11 @@ namespace MethodStore
             else
                 _dataParameters = _ref.Parameters?.ToList();
 
+            if (_dataParameters == null)
+                _dataParameters = new List<Parameter>();
+
             DataContext = _ref;
-            
+
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
 
             ReadFileTypeMethods();
