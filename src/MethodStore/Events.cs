@@ -39,4 +39,20 @@ namespace MethodStore
         }
     }
 
+
+    internal delegate void GlobalHotKeyEvent();
+
+    internal class GlobalHotKeyEvents : EventArgs
+    {
+        internal event GlobalHotKeyEvent GlobalHotKeyEvent;
+
+        internal void EvokeGlobalHotKeyEvent()
+        {
+            if (GlobalHotKeyEvent == null)
+                return;
+
+            GlobalHotKeyEvent();
+        }
+    }
+
 }
