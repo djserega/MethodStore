@@ -10,7 +10,8 @@
         Title="Хранилище методов" 
         Height="550" Width="1450" MinHeight="550" MinWidth="800"
         Background="Teal"
-        Loaded="MainWindowMethodStore_Loaded">
+        Loaded="MainWindowMethodStore_Loaded"
+        Closed="MainWindowMethodStore_Closed">
 
     <Controls:MetroWindow.Resources>
         <Style x:Key="DataGridStyleColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">

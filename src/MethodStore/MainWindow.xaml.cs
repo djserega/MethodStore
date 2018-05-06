@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,9 +32,14 @@ namespace MethodStore
         private bool _formLoaded;
 
         private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
-        private List<ObjectMethod> _dataMethods;
         private CallUpdateListObjectMethodsEvents _callUpdate = new CallUpdateListObjectMethodsEvents();
+        private GlobalHotKeyEvents _globalHotKeyEvents = new GlobalHotKeyEvents();
+
         private SubscriberWatcher _subscriberWatcher;
+
+        private List<ObjectMethod> _dataMethods;
+
+        private GlobalHotKeyManager _globalHotKeyManager;
 
         #endregion
 
@@ -125,8 +132,10 @@ namespace MethodStore
 
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
             _callUpdate.CallUpdateListObjectMethods += _callUpdate_CallUpdateListObjectMethods;
+            _globalHotKeyEvents.GlobalHotKeyEvent += _globalHotKeyEvents_GlobalHotKeyEvent;
 
             _subscriberWatcher = new SubscriberWatcher(_callUpdate);
+            _globalHotKeyManager = new GlobalHotKeyManager(_globalHotKeyEvents);
 
             DataContext = this;
         }
@@ -233,6 +242,7 @@ namespace MethodStore
             return collectionFilter;
         }
 
+
         private void _refreshDataGrid_RefreshDataGrid()
         {
             SetItemSourceDataGrid();
@@ -240,7 +250,7 @@ namespace MethodStore
 
         private void _callUpdate_CallUpdateListObjectMethods(bool NeedNotified)
         {
-            Dispatcher.Invoke(new ThreadStart(delegate 
+            Dispatcher.Invoke(new ThreadStart(delegate
             {
                 try
                 {
@@ -251,6 +261,24 @@ namespace MethodStore
                 }
             }));
         }
+
+        private void _globalHotKeyEvents_GlobalHotKeyEvent()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            IntPtr hWnd = currentProcess.MainWindowHandle;
+            if (hWnd != IntPtr.Zero)
+            {
+                SetForegroundWindow(hWnd);
+                ShowWindow(hWnd, 3);
+                ShowFormObjectMethod(Guid.NewGuid(), true);
+            }
+        }
+        [DllImport("user32.dll")]
+        internal static extern IntPtr SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
 
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
@@ -279,5 +307,9 @@ namespace MethodStore
                     Clipboard.SetText(objectMethod.MethodInvokationString);
         }
 
+        private void MainWindowMethodStore_Closed(object sender, EventArgs e)
+        {
+            _globalHotKeyManager.Dispose();
+        }
     }
 }
