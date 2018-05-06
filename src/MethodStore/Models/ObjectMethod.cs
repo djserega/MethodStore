@@ -56,7 +56,14 @@ namespace MethodStore
 
         private void SetMethodInvokationString()
         {
-            MethodInvokationString = $"{_module}.{_methodName}();";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 1; i < Parameters?.Count(); i++)
+                stringBuilder.Append(',');
+
+            string textParameters = stringBuilder.ToString();
+
+            MethodInvokationString = $"{_module}.{_methodName}({textParameters});";
         }
     }
 }
