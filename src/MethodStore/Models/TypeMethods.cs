@@ -21,14 +21,6 @@ namespace MethodStore
             GroupName = groupName;
         }
 
-        //public override string ToString()
-        //{
-        //    if (!string.IsNullOrWhiteSpace(GroupName))
-        //        return GroupName;
-        //    else
-        //        return Name;
-        //}
-
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is TypeMethods))
