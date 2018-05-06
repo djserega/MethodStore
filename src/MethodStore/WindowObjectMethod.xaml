@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="Метод" Height="400" Width="950"
+        Title="Метод" Height="500" Width="1100"
         Background="Teal"
         Loaded="FormObjectMethod_Loaded"
         Closed="FormObjectMethod_Closed"
@@ -146,9 +146,11 @@
                                   Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
                                   Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="150"/>
-                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="150" MaxWidth="250"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="250" MaxWidth="500"/>
+                                <DataGridCheckBoxColumn Header="По значению" Binding="{Binding ByValue}" CanUserResize="False"/>
+                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="250"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="150" MaxWidth="350"/>
+                                <DataGridTextColumn Header="По умолчанию" Binding="{Binding ValueByDefault}" MinWidth="150" MaxWidth="250"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="500"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
