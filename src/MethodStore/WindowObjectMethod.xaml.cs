@@ -75,9 +75,9 @@ namespace MethodStore
         {
             _owner = (MainWindow)Owner;
             _minLeft = _owner.Left + 10;
-            _maxLeft = _owner.Left + _owner.Width - 10 - Width;
+            _maxLeft = _owner.Left + _owner.ActualWidth - 40;
             _minTop = _owner.Top + 10;
-            _maxTop = _owner.Top + _owner.Height - 10 - Height;
+            _maxTop = _owner.Top + _owner.ActualHeight - 40;
 
             SetPositionWindow(true);
 
@@ -167,8 +167,13 @@ namespace MethodStore
 
         private void GetTextInClipboard()
         {
-            new TextParser().ParseClipboardToModuleAndMethodName(_ref);
-            _dataParameters = _ref.Parameters.ToList();
+            new TextParser().ParseClipboardTextToObjectMethods(_ref);
+
+            _dataParameters = _ref.Parameters?.ToList();
+
+            if (_dataParameters == null)
+                _dataParameters = new List<Parameter>();
+
             SetItemSourceDataGridParameters();
         }
 
