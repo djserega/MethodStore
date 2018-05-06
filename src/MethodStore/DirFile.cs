@@ -22,15 +22,27 @@ namespace MethodStore
         internal DirFile()
         {
             _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
             _pathData = Path.Combine(
                 _baseDirectory,
                 "Data");
+            CreateDirectory(_pathData);
+
             _pathDataFiles = Path.Combine(
                 _pathData,
                 "Methods");
+            CreateDirectory(_pathDataFiles);
+
             _fullNameFile = Path.Combine(
                 _pathData,
                 "TypeMethods.txt");
+        }
+
+        private void CreateDirectory(string path)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+                directoryInfo.Create();
         }
 
         private bool CreatePathDataFiles()
