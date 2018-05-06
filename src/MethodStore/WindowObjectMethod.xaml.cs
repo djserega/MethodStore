@@ -185,6 +185,9 @@ namespace MethodStore
         {
             _listTypeMethods = await ReadFileTypeMethodsAsync();
 
+            if (_listTypeMethods == null)
+                return;
+
             ListCollectionView collectionView = new ListCollectionView(_listTypeMethods);
             collectionView.GroupDescriptions.Add(new PropertyGroupDescription("GroupName"));
 
