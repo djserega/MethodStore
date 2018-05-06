@@ -57,12 +57,9 @@ namespace MethodStore
             {
                 int positionOpeningBracket = textClipboard.IndexOf("(");
 
-                objectMethod.MethodName = new string(textClipboard.Take(positionOpeningBracket).ToArray()).Replace(" ", "");
+                objectMethod.MethodName = RemoveSpace(textClipboard.Substring(0, positionOpeningBracket));
 
-                textClipboard = textClipboard.TrimStart(
-                    (objectMethod.MethodName + "(").ToCharArray());
-
-                objectMethod.MethodName = RemoveSpace(objectMethod.MethodName);
+                textClipboard = textClipboard.Substring(positionOpeningBracket + 1);
 
                 int countClosingBracket = textClipboard.Count(f => f == ')');
 
@@ -82,6 +79,7 @@ namespace MethodStore
                         if (string.IsNullOrWhiteSpace(item))
                             continue;
 
+
                         string textCurrentParameter = item;
 
                         textCurrentParameter = textCurrentParameter.TrimStart().TrimEnd();
@@ -97,11 +95,8 @@ namespace MethodStore
                         int positionEquals = textCurrentParameter.IndexOf('=');
                         if (positionEquals > 0)
                         {
-                            newParameter.Name = textCurrentParameter.Substring(0, positionEquals);
-                            newParameter.ValueByDefault = TrimNotUserChar(
-                                textCurrentParameter.TrimStart(
-                                    newParameter.Name.ToCharArray()));
-                            newParameter.Name = RemoveSpace(newParameter.Name);
+                            newParameter.Name = RemoveSpace(textCurrentParameter.Substring(0, positionEquals));
+                            newParameter.ValueByDefault = TrimNotUserChar(textCurrentParameter.Substring(positionEquals));
                         }
                         else
                             newParameter.Name = RemoveSpace(textCurrentParameter);
