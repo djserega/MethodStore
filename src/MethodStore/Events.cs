@@ -44,14 +44,25 @@ namespace MethodStore
 
     internal class GlobalHotKeyEvents : EventArgs
     {
-        internal event GlobalHotKeyEvent GlobalHotKeyEvent;
+        internal event GlobalHotKeyEvent GlobalHotKeyOpenFormObjectEvent;
 
-        internal void EvokeGlobalHotKeyEvent()
+        internal void EvokeOpenFormObjectMethodEvent()
         {
-            if (GlobalHotKeyEvent == null)
+            if (GlobalHotKeyOpenFormObjectEvent == null)
                 return;
 
-            GlobalHotKeyEvent();
+            GlobalHotKeyOpenFormObjectEvent();
+        }
+
+
+        internal event GlobalHotKeyEvent GlobalHotKeyMainMenuEvent;
+
+        internal void EvokeOpenFormMainMenuMethodEvent()
+        {
+            if (GlobalHotKeyMainMenuEvent == null)
+                return;
+
+            GlobalHotKeyMainMenuEvent();
         }
     }
 
