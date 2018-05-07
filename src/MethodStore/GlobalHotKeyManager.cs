@@ -17,10 +17,12 @@ namespace MethodStore
         internal bool PressedLeftCtrl { get; private set; }
         internal bool PressedLeftAlt { get; private set; }
         internal bool PressedF { get; private set; }
+        internal bool PressedC { get; private set; }
 
         private const Key _keyLeftCtrl = Key.LeftCtrl;
         private const Key _keyLeftAlt = Key.LeftAlt;
         private const Key _keyF = Key.F;
+        private const Key _keyC = Key.C;
 
         internal GlobalHotKeyManager(GlobalHotKeyEvents globalHotKeyEvents)
         {
@@ -46,15 +48,30 @@ namespace MethodStore
                 case _keyF:
                     PressedF = true;
                     break;
+                case _keyC:
+                    PressedC = true;
+                    break;
             }
 
-            if (PressedLeftCtrl && PressedLeftAlt && PressedF)
+            if (PressedLeftCtrl && PressedLeftAlt)
             {
-                PressedLeftCtrl = false;
-                PressedLeftAlt = false;
-                PressedF = false;
+                if (PressedF)
+                {
+                    PressedLeftCtrl = false;
+                    PressedLeftAlt = false;
+                    PressedF = false;
 
-                _globalHotKeyEvents.EvokeGlobalHotKeyEvent();
+                    _globalHotKeyEvents.EvokeOpenFormMainMenuMethodEvent();
+                }
+                else if (PressedC)
+                {
+                    PressedLeftCtrl = false;
+                    PressedLeftAlt = false;
+                    PressedC = false;
+
+                    _globalHotKeyEvents.EvokeOpenFormObjectMethodEvent();
+                }
+
             }
         }
 
