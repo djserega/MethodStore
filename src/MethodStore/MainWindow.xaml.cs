@@ -132,7 +132,8 @@ namespace MethodStore
 
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
             _callUpdate.CallUpdateListObjectMethods += _callUpdate_CallUpdateListObjectMethods;
-            _globalHotKeyEvents.GlobalHotKeyEvent += _globalHotKeyEvents_GlobalHotKeyEvent;
+            _globalHotKeyEvents.GlobalHotKeyOpenFormObjectEvent += _globalHotKeyEvents_GlobalHotKeyOpenFormObjectEvent;
+            _globalHotKeyEvents.GlobalHotKeyMainMenuEvent += _globalHotKeyEvents_GlobalHotKeyMainMenuEvent; ;
 
             _subscriberWatcher = new SubscriberWatcher(_callUpdate);
             _globalHotKeyManager = new GlobalHotKeyManager(_globalHotKeyEvents);
@@ -242,6 +243,7 @@ namespace MethodStore
             return collectionFilter;
         }
 
+        #region Events
 
         private void _refreshDataGrid_RefreshDataGrid()
         {
@@ -262,7 +264,7 @@ namespace MethodStore
             }));
         }
 
-        private void _globalHotKeyEvents_GlobalHotKeyEvent()
+        private void _globalHotKeyEvents_GlobalHotKeyOpenFormObjectEvent()
         {
             Process currentProcess = Process.GetCurrentProcess();
             IntPtr hWnd = currentProcess.MainWindowHandle;
@@ -273,12 +275,25 @@ namespace MethodStore
                 ShowFormObjectMethod(Guid.NewGuid(), true);
             }
         }
+
+        private void _globalHotKeyEvents_GlobalHotKeyMainMenuEvent()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            IntPtr hWnd = currentProcess.MainWindowHandle;
+            if (hWnd != IntPtr.Zero)
+            {
+                SetForegroundWindow(hWnd);
+                ShowWindow(hWnd, 3);
+            }
+        }
+
         [DllImport("user32.dll")]
         internal static extern IntPtr SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
+        #endregion
 
         private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
         {
