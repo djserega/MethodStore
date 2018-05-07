@@ -67,9 +67,12 @@ namespace MethodStore
                 {
                     string textParameter = string.Empty;
                     textParameter = textClipboard.TrimEnd(' ');
+                    textParameter = textParameter.Replace("\r", "");
+                    textParameter = textParameter.Replace("\n", "");
+                    textParameter = textParameter.Replace("\t", "");
                     textParameter = textParameter.TrimEnd("Экспорт".ToCharArray());
                     textParameter = textParameter.TrimEnd(' ');
-                    textParameter = textParameter.TrimEnd(")".ToCharArray());
+                    textParameter = textParameter.TrimEnd(')');
 
                     List<Parameter> listParameters = new List<Parameter>();
 
@@ -80,7 +83,7 @@ namespace MethodStore
                             continue;
 
 
-                        string textCurrentParameter = item;
+                        string textCurrentParameter = item.Replace("знач ", "Знач ");
 
                         textCurrentParameter = textCurrentParameter.TrimStart().TrimEnd();
 
