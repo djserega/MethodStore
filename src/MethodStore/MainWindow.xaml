@@ -62,6 +62,8 @@
                         <CheckBox x:Name="CheckBoxFilterDescription" Background="LightSteelBlue"
                                   IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterDescription}"
                                   Click="CheckBoxFilterDescription_Click"/>
+                        <Button x:Name="ButtonUncheckedFilter" Content="Отключить фильтры" Background="LightSteelBlue"
+                                Click="ButtonUncheckedFilter_Click"/>
                     </StackPanel>
                 </StackPanel>
 

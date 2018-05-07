@@ -29,7 +29,7 @@ namespace MethodStore
 
         #region Private fields
 
-        private bool _formLoaded;
+        private bool _isetSourceInitialized;
 
         private RefreshDataGridEvents _refreshDataGrid = new RefreshDataGridEvents();
         private CallUpdateListObjectMethodsEvents _callUpdate = new CallUpdateListObjectMethodsEvents();
@@ -149,7 +149,7 @@ namespace MethodStore
             FilterMethodName = true;
             FilterDescription = true;
 
-            _formLoaded = true;
+            _isetSourceInitialized = true;
 
             _refreshDataGrid.EvokeRefreshDataGrid();
         }
@@ -187,6 +187,20 @@ namespace MethodStore
             FilterText = string.Empty;
         }
 
+        private void ButtonUncheckedFilter_Click(object sender, RoutedEventArgs e)
+        {
+            _isetSourceInitialized = false;
+
+            FilterTypeMethods = false;
+            FilterModule = false;
+            FilterMethodName = false;
+            FilterDescription = false;
+
+            _isetSourceInitialized = true;
+
+            SetItemSourceDataGrid();
+        }
+
         #endregion
 
         #region Filter (CheckBox, TextBox)
@@ -220,7 +234,7 @@ namespace MethodStore
 
         private void SetItemSourceDataGrid()
         {
-            if (!_formLoaded)
+            if (!_isetSourceInitialized)
                 return;
 
             _dataMethods = new UpdateFilesObjectMethod().GetList();
@@ -341,5 +355,6 @@ namespace MethodStore
         {
             _selectedObjectMethod = DataGridData.SelectedItem as ObjectMethod;
         }
+
     }
 }
