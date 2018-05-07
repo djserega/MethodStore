@@ -38,6 +38,7 @@ namespace MethodStore
         private SubscriberWatcher _subscriberWatcher;
 
         private List<ObjectMethod> _dataMethods;
+        private ObjectMethod _selectedObjectMethod;
 
         private GlobalHotKeyManager _globalHotKeyManager;
 
@@ -170,6 +171,15 @@ namespace MethodStore
         private void ButtonEditMethod_Click(object sender, RoutedEventArgs e)
         {
             OpenSelectedObjectMethod();
+        }
+
+        private void ButtonDeleteMethod_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedObjectMethod != null)
+            {
+                _selectedObjectMethod.DeleteObject();
+                SetItemSourceDataGrid();
+            }
         }
 
         private void ButtonClearFilter_Click(object sender, RoutedEventArgs e)
@@ -325,6 +335,11 @@ namespace MethodStore
         private void MainWindowMethodStore_Closed(object sender, EventArgs e)
         {
             _globalHotKeyManager.Dispose();
+        }
+
+        private void DataGridData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedObjectMethod = DataGridData.SelectedItem as ObjectMethod;
         }
     }
 }

@@ -33,11 +33,14 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal">
                         <Separator Width="1" Background="{x:Null}"/>
-                        <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal"
+                        <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonAddMethod_Click"/>
                         <Separator Width="1" Background="{x:Null}"/>
-                        <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal"
+                        <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonEditMethod_Click"/>
+                        <Separator Width="1" Background="{x:Null}"/>
+                        <Button x:Name="ButtonDeleteMethod" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
+                            Click="ButtonDeleteMethod_Click"/>
                         <Separator Width="1" Background="{x:Null}"/>
                     </StackPanel>
                     <Separator Width="5" Background="{x:Null}"/>
@@ -82,7 +85,7 @@
                           RowStyle="{StaticResource DataGridStyleRow}"
                           Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}"
                           Height="{Binding Path=ActualHeight, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='77'}"
-                          MouseDoubleClick="DataGridData_MouseDoubleClick">
+                          MouseDoubleClick="DataGridData_MouseDoubleClick" SelectionChanged="DataGridData_SelectionChanged">
                     <DataGrid.CommandBindings>
                         <CommandBinding x:Name="DataGridDataEnter" Executed="DataGridDataEnter_Executed" Command="ApplicationCommands.Open"/>
                     </DataGrid.CommandBindings>

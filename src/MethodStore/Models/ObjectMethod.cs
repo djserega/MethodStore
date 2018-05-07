@@ -54,6 +54,12 @@ namespace MethodStore
             DateCreation = DateTime.Now;
         }
 
+        internal void DeleteObject()
+        {
+            if (!string.IsNullOrWhiteSpace(Path))
+                new DirFile().Delete(Path);
+        }
+
         private void SetMethodInvokationString()
         {
             StringBuilder stringBuilder = new StringBuilder();
