@@ -91,11 +91,6 @@ namespace MethodStore
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _listener.UnHookKeyboard();
-        }
-
         public void Dispose()
         {
             _listener.UnHookKeyboard();
