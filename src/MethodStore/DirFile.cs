@@ -128,7 +128,9 @@ namespace MethodStore
 
         internal void Delete(string path)
         {
-            new FileInfo(path).Delete();
+            FileInfo fileInfo = new FileInfo(path);
+            if (fileInfo.Exists)
+                fileInfo.Delete();
         }
 
         internal List<TypeMethods> GetListTypeMethods()
