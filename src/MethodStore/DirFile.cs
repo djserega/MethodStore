@@ -170,7 +170,7 @@ namespace MethodStore
                 }
             }
 
-            listTypeMethods.Sort((a, b) => string.Compare(a.Name, b.Name));
+            listTypeMethods.Sort((a, b) => string.Compare(a.GroupName + a.Name, b.GroupName + b.Name));
 
             return listTypeMethods;
         }
