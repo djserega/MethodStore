@@ -16,20 +16,18 @@ namespace MethodStore
             if (string.IsNullOrWhiteSpace(textClipboard))
                 return false;
 
-            textClipboard = textClipboard.TrimStart("Процедура ".ToCharArray());
-            textClipboard = textClipboard.TrimStart("Функция ".ToCharArray());
+            textClipboard = RemoveStartText(textClipboard, "Процедура");
+            textClipboard = RemoveStartText(textClipboard, "Функция");
+            textClipboard = textClipboard.TrimStart();
 
             int countDot = textClipboard.Count(f => f == '.');
             if (countDot == 1)
             {
                 int positionDot = textClipboard.IndexOf('.');
 
-                objectMethod.Module = new string(textClipboard.Take(positionDot).ToArray());
+                objectMethod.Module = RemoveSpace(new string(textClipboard.Take(positionDot).ToArray()));
 
-                textClipboard = textClipboard.TrimStart(
-                    (objectMethod.Module + ".").ToCharArray());
-
-                objectMethod.Module = RemoveSpace(objectMethod.Module);
+                textClipboard = RemoveStartText(textClipboard, objectMethod.Module + ".");
 
                 ParseTextMethodNameAndParameters(objectMethod, textClipboard);
 
@@ -66,11 +64,14 @@ namespace MethodStore
                 if (countClosingBracket == 1)
                 {
                     string textParameter = string.Empty;
-                    textParameter = textClipboard.TrimEnd(' ');
+
+                    textParameter = textClipboard;
                     textParameter = textParameter.Replace("\r", "");
                     textParameter = textParameter.Replace("\n", "");
                     textParameter = textParameter.Replace("\t", "");
-                    textParameter = textParameter.TrimEnd("Экспорт".ToCharArray());
+                    textParameter = textParameter.TrimEnd(';');
+                    textParameter = textParameter.TrimEnd(' ');
+                    textParameter = RemoveEndText(textParameter, "Экспорт");
                     textParameter = textParameter.TrimEnd(' ');
                     textParameter = textParameter.TrimEnd(')');
 
@@ -113,6 +114,22 @@ namespace MethodStore
                 objectMethod.MethodName = textClipboard;
         }
 
+        private string RemoveStartText(string text, string find)
+        {
+            if (text.StartsWith(find))
+                return text.Substring(find.Length);
+            else
+                return text;
+        }
+
+        private string RemoveEndText(string text, string find)
+        {
+            if (text.EndsWith(find))
+                return text.Remove(text.Length - find.Length);
+            else
+                return text;
+        }
+
         private string RemoveSpace(string text)
         {
             return text.Replace(" ", "");
@@ -120,7 +137,12 @@ namespace MethodStore
 
         private string TrimNotUserChar(string text)
         {
-            return text.TrimStart().TrimStart('=').TrimStart().TrimEnd().TrimStart('"').TrimEnd('"');
+            string tempString = text.TrimStart().TrimStart('=').Trim();
+
+            if (tempString != "\"\"")
+                tempString = tempString.TrimStart('"').TrimEnd('"');
+
+            return tempString;
         }
 
     }
