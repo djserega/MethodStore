@@ -57,14 +57,14 @@ namespace MethodStore
             ID = _ref.ID;
 
             if (_isNewObject)
-                GetTextInClipboard();
+                ParseTextInClipboard();
             else
                 _dataParameters = _ref.Parameters?.ToList();
 
             if (_dataParameters == null)
                 _dataParameters = new List<Parameter>();
 
-            DataContext = _ref;
+            SetDataContextForm();
 
             _refreshDataGrid.RefreshDataGrid += _refreshDataGrid_RefreshDataGrid;
 
@@ -165,7 +165,7 @@ namespace MethodStore
 
         #region Clipboard
 
-        private void GetTextInClipboard()
+        private void ParseTextInClipboard()
         {
             new TextParser().ParseClipboardTextToObjectMethods(_ref);
 
@@ -174,6 +174,7 @@ namespace MethodStore
             if (_dataParameters == null)
                 _dataParameters = new List<Parameter>();
 
+            SetDataContextForm();
             SetItemSourceDataGridParameters();
         }
 
@@ -242,6 +243,19 @@ namespace MethodStore
             new UpdateFilesObjectMethod(ID, _ref).Save();
             _isNewObject = false;
             Close();
+        }
+
+        private void ButtonParseClipboard_Click(object sender, RoutedEventArgs e)
+        {
+            ParseTextInClipboard();
+        }
+
+        private void SetDataContextForm()
+        {
+            DataContext = _ref;
+            BindingOperations.GetBindingExpression(TextBoxModule, TextBox.TextProperty).UpdateTarget();
+            BindingOperations.GetBindingExpression(TextBoxMethodName, TextBox.TextProperty).UpdateTarget();
+            BindingOperations.GetBindingExpression(TextBoxMethodInvokationString, TextBox.TextProperty).UpdateTarget();
         }
 
     }

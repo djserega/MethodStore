@@ -48,6 +48,9 @@
                     <Separator Width="1" Background="{x:Null}"/>
                     <Button x:Name="ButtonSave" Content="Записать" Background="LightSteelBlue"
                             Click="ButtonSave_Click"/>
+                    <Separator Width="3" Background="{x:Null}"/>
+                    <Button x:Name="ButtonParseClipboard" Content="Получить из буфера обмена" Background="LightSteelBlue"
+                            Click="ButtonParseClipboard_Click"/>
                     <Separator Width="1" Background="{x:Null}"/>
                 </StackPanel>
 
