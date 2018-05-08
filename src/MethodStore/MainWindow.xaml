@@ -35,13 +35,13 @@
                         <Separator Width="1" Background="{x:Null}"/>
                         <Button x:Name="ButtonAddMethod" Content="Добавить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonAddMethod_Click"/>
-                        <Separator Width="1" Background="{x:Null}"/>
+                        <Separator Width="3" Background="{x:Null}"/>
                         <Button x:Name="ButtonEditMethod" Content="Изменить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonEditMethod_Click"/>
-                        <Separator Width="1" Background="{x:Null}"/>
+                        <Separator Width="3" Background="{x:Null}"/>
                         <Button x:Name="ButtonDeleteMethod" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonDeleteMethod_Click"/>
-                        <Separator Width="1" Background="{x:Null}"/>
+                        <Separator Width="3" Background="{x:Null}"/>
                     </StackPanel>
                     <Separator Width="5" Background="{x:Null}"/>
                     <StackPanel Orientation="Horizontal">
@@ -62,6 +62,7 @@
                         <CheckBox x:Name="CheckBoxFilterDescription" Background="LightSteelBlue"
                                   IsChecked="{Binding ElementName=MainWindowMethodStore, Path=FilterDescription}"
                                   Click="CheckBoxFilterDescription_Click"/>
+                        <Separator Width="3" Background="{x:Null}"/>
                         <Button x:Name="ButtonUncheckedFilter" Content="Отключить фильтры" Background="LightSteelBlue"
                                 Click="ButtonUncheckedFilter_Click"/>
                     </StackPanel>
