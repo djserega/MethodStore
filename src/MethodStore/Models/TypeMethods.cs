@@ -8,8 +8,30 @@ namespace MethodStore
 {
     public class TypeMethods
     {
-        public string Name { get; set; }
-        public string GroupName { get; set; }
+        private string _name;
+        private string _groupName;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                string tempValue = value.Trim();
+                if (_name != tempValue)
+                    _name = tempValue;
+            }
+        }
+        public string GroupName
+        {
+            get { return _groupName; }
+            set
+            {
+                string tempValue = value.Trim();
+                if (_groupName != tempValue)
+                    _groupName = tempValue;
+            }
+        }
+
 
         public TypeMethods()
         {
@@ -26,12 +48,12 @@ namespace MethodStore
             if (obj == null || !(obj is TypeMethods))
                 return false;
 
-            return ((TypeMethods)obj).Name == this.Name;
+            return ((TypeMethods)obj).Name == Name;
         }
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode();
+            return Name.GetHashCode();
         }
     }
 }
