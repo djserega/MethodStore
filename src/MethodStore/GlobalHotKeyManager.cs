@@ -88,6 +88,9 @@ namespace MethodStore
                 case _keyF:
                     PressedF = false;
                     break;
+                case _keyC:
+                    PressedC = false;
+                    break;
             }
         }
 
