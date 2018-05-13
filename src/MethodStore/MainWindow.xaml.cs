@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MethodStore.Files;
 
 namespace MethodStore
 {
@@ -41,6 +42,8 @@ namespace MethodStore
         private ObjectMethod _selectedObjectMethod;
 
         private GlobalHotKeyManager _globalHotKeyManager;
+
+        private ParametersTypes _parametersTypes;
 
         #endregion
 
@@ -152,11 +155,13 @@ namespace MethodStore
             _isetSourceInitialized = true;
 
             _refreshDataGrid.EvokeRefreshDataGrid();
+
+            ReadFileTypeParameters();
         }
 
-        private void DataGridDataEnter_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void MainWindowMethodStore_Closed(object sender, EventArgs e)
         {
-            OpenSelectedObjectMethod();
+            _globalHotKeyManager.Dispose();
         }
 
         #endregion
@@ -232,6 +237,8 @@ namespace MethodStore
 
         #endregion
 
+        #region DataGrid
+
         private void SetItemSourceDataGrid()
         {
             if (!_isetSourceInitialized)
@@ -266,6 +273,23 @@ namespace MethodStore
             collectionFilter.Filter = objectFilter;
             return collectionFilter;
         }
+
+        private void DataGridDataEnter_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenSelectedObjectMethod();
+        }
+
+        private void DataGridData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedObjectMethod = DataGridData.SelectedItem as ObjectMethod;
+        }
+
+        private void DataGridData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenSelectedObjectMethod();
+        }
+
+        #endregion
 
         #region Events
 
@@ -319,24 +343,34 @@ namespace MethodStore
 
         #endregion
 
-        private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
+        #region Parameters types
+
+        private async void ReadFileTypeParameters()
         {
-            WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
-            {
-                Owner = this
-            };
-            formObject.ShowDialog();
+            _parametersTypes = await ReadFileTypeParametersAsync();
         }
 
-        private void DataGridData_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task<ParametersTypes> ReadFileTypeParametersAsync()
         {
-            OpenSelectedObjectMethod();
+            return await Task.Run(() => new FileParametersTypes().ReadFileTypes());
         }
+
+        #endregion
 
         private void OpenSelectedObjectMethod()
         {
             if (DataGridData.SelectedItem is ObjectMethod objectMethod)
                 ShowFormObjectMethod(objectMethod.ID);
+        }
+
+        private void ShowFormObjectMethod(Guid id, bool isNewObject = false)
+        {
+            WindowObjectMethod formObject = new WindowObjectMethod(id, isNewObject)
+            {
+                Owner = this,
+                ParametersTypes = _parametersTypes
+            };
+            formObject.ShowDialog();
         }
 
         private void MenuItemCopyToClipboard_Click(object sender, RoutedEventArgs e)
@@ -345,16 +379,5 @@ namespace MethodStore
                 if (!string.IsNullOrWhiteSpace(objectMethod.MethodInvokationString))
                     Clipboard.SetText(objectMethod.MethodInvokationString);
         }
-
-        private void MainWindowMethodStore_Closed(object sender, EventArgs e)
-        {
-            _globalHotKeyManager.Dispose();
-        }
-
-        private void DataGridData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _selectedObjectMethod = DataGridData.SelectedItem as ObjectMethod;
-        }
-
     }
 }

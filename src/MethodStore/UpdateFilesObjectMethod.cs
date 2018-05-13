@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MethodStore.Files;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace MethodStore
 
         internal ObjectMethod Get()
         {
-            RefObjectMethod = new DirFile().GetFileObjectMethods(Id);
+            RefObjectMethod = new FileObjectMethods().GetFileObjectMethods(Id);
 
             Id = RefObjectMethod.ID;
 
@@ -40,7 +41,7 @@ namespace MethodStore
 
             List<ObjectMethod> listObject = new List<ObjectMethod>();
 
-            foreach (FileInfo item in new DirFile().GetListFilesObjectMethods())
+            foreach (FileInfo item in new FileObjectMethods().GetListFilesObjectMethods())
             {
                 listObject.Add(json.DeserialiseObjectMethod(item));
             }
@@ -50,7 +51,7 @@ namespace MethodStore
 
         internal void Save()
         {
-            new DirFile().SaveObjectMethods(Id, RefObjectMethod);
+            new FileObjectMethods().SaveObjectMethods(Id, RefObjectMethod);
         }
 
     }

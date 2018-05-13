@@ -66,7 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Files\FileTypeMethods.cs" />
+    <Compile Include="Files\FileObjectMethods.cs" />
+    <Compile Include="Files\FileParametersTypes.cs" />
     <Compile Include="GlobalHotKeyManager.cs" />
+    <Compile Include="Models\ParametersTypes.cs" />
     <Compile Include="TextParser.cs" />
     <Compile Include="DirFile.cs" />
     <Compile Include="Json.cs" />

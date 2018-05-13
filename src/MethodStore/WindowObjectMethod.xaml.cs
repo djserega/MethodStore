@@ -44,6 +44,8 @@ namespace MethodStore
 
         #endregion
 
+        internal ParametersTypes ParametersTypes { get; set; }
+
         #region Event window
 
         public WindowObjectMethod(Guid id, bool isNewObject = false)
@@ -125,7 +127,6 @@ namespace MethodStore
             SetSelectedDataGridParameters(newParameter, "ParametersColumnName");
         }
 
-
         private void ButtonDeleteParameter_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridParameters.SelectedItem is Parameter parameter)
@@ -138,6 +139,11 @@ namespace MethodStore
         private void ButtonCopyToClipBoard_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(_ref.MethodInvokationString);
+        }
+
+        private void ButtonParseClipboard_Click(object sender, RoutedEventArgs e)
+        {
+            ParseTextInClipboard();
         }
 
         #endregion
@@ -243,11 +249,6 @@ namespace MethodStore
             new UpdateFilesObjectMethod(ID, _ref).Save();
             _isNewObject = false;
             Close();
-        }
-
-        private void ButtonParseClipboard_Click(object sender, RoutedEventArgs e)
-        {
-            ParseTextInClipboard();
         }
 
         private void SetDataContextForm()
