@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace MethodStore
 {
+    [Serializable]
     public class Parameter
     {
         public string Name { get; set; }

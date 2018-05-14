@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MethodStore
 {
+    [Serializable]
     public class ObjectMethod
     {
         private string _module;
