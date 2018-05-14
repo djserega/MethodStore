@@ -64,6 +64,11 @@ namespace MethodStore.Files
                 xmlReader.Close();
             }
 
+            foreach (var item in keysType)
+            {
+                item.Value.Sort();
+            }
+
             ParametersTypes types = new ParametersTypes()
             {
                 UniqueTypes = listType.Distinct().ToList(),
