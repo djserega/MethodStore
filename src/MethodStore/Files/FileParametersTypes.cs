@@ -14,7 +14,7 @@ namespace MethodStore.Files
 
         public FileParametersTypes()
         {
-            FullNameFileTypes = new DirFile().FullNameFileTypes;
+            FullNameFileTypes = new DirFile().FullNameFileParametersTypes;
         }
 
         public ParametersTypes ReadFileTypes()

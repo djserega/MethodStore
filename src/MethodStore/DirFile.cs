@@ -15,11 +15,11 @@ namespace MethodStore
         private string _pathData;
         private string _pathDataFiles;
         private string _fullNameFileTypeMethods;
-        private string _fullNameFileTypes;
+        private string _fullNameFileParametersTypes;
 
         internal string PathData { get => _pathData;  }
         internal string PathDataFiles { get => _pathDataFiles; }
-        internal string FullNameFileTypes { get => _fullNameFileTypes; }
+        internal string FullNameFileParametersTypes { get => _fullNameFileParametersTypes; }
 
         internal DirFile()
         {
@@ -39,9 +39,9 @@ namespace MethodStore
                 _pathData,
                 "TypeMethods.txt");
 
-            _fullNameFileTypes = Path.Combine(
+            _fullNameFileParametersTypes = Path.Combine(
                 _pathData,
-                "Types.xml");
+                "ParametersTypes.xml");
         }
 
         private void CreateDirectory(string path)
