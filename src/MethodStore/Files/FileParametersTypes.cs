@@ -23,8 +23,22 @@ namespace MethodStore.Files
             if (!fileInfo.Exists)
                 return null;
 
-            List<string> listType = new List<string>();
-            Dictionary<string, List<string>> keysType = new Dictionary<string, List<string>>();
+            List<string> listType = new List<string>() { "Примитивные типы" };
+            Dictionary<string, List<string>> keysType = new Dictionary<string, List<string>>()
+            {
+                {
+                    "Примитивные типы",
+                    new List<string>()
+                    {
+                        "Null",
+                        "Неопределено",
+                        "Число",
+                        "Строка",
+                        "Дата",
+                        "Булево"
+                    }
+                }
+            };
 
             using (XmlReader xmlReader = XmlReader.Create(FullNameFileTypes))
             {
