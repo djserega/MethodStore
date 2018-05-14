@@ -83,7 +83,7 @@
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>
-                <DataGrid x:Name="DataGridData" Background="LightSteelBlue" ItemsSource="{Binding _dataMethods}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"
+                <DataGrid x:Name="DataGridData" Background="LightSteelBlue" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"
                           ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
                           RowStyle="{StaticResource DataGridStyleRow}"
                           Width="{Binding Path=ActualWidth, ElementName=MainGrid, Converter={local:ElementsFormConverter}, ConverterParameter='10'}"

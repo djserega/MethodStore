@@ -15,7 +15,8 @@ namespace MethodStore
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ToDouble(value) - ToDouble(parameter);
+            double result = ToDouble(value) - ToDouble(parameter);
+            return result < 0 ? value : result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
