@@ -259,5 +259,20 @@ namespace MethodStore
             BindingOperations.GetBindingExpression(TextBoxMethodInvokationString, TextBox.TextProperty).UpdateTarget();
         }
 
+        private void ButtonOpenFormParametersTypes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBoxRowType_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DataGridParameters.SelectedItem is Parameter rowParameter)
+            {
+                if (sender is TextBox rowTextBox)
+                {
+                    rowParameter.Type = rowTextBox.Text;
+                }
+            }
+        }
     }
 }

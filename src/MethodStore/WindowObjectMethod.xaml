@@ -7,7 +7,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="Метод" Height="500" Width="1100"
+        Title="Метод" Height="600" Width="1200"
         Background="Teal"
         Loaded="FormObjectMethod_Loaded"
         Closed="FormObjectMethod_Closed"
@@ -150,10 +150,33 @@
                                   Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="По значению" Binding="{Binding ByValue}" CanUserResize="False"/>
-                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="250"/>
-                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" MinWidth="150" MaxWidth="350"/>
-                                <DataGridTextColumn Header="По умолчанию" Binding="{Binding ValueByDefault}" MinWidth="150" MaxWidth="250"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="500"/>
+                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="300"/>
+                                <DataGridTemplateColumn x:Name="ColumnType" Header="Тип" MinWidth="150" MaxWidth="450">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBox x:Name="TextBoxRowType" Text="{Binding Type}" Background="LightSteelBlue" BorderBrush="LightSteelBlue"
+                                                         Width="{Binding Path=ActualWidth, ElementName=ColumnType, Converter={local:ElementsFormConverter}, ConverterParameter=28}"
+                                                         TextChanged="TextBoxRowType_TextChanged"/>
+                                                <Button x:Name="ButtonOpenFormParametersTypes" Content="..." Background="LightSteelBlue" BorderBrush="{x:Null}" Width="25" HorizontalAlignment="Right"
+                                                        Click="ButtonOpenFormParametersTypes_Click">
+                                                    <Button.Style>
+                                                        <Style>
+                                                            <Setter Property="Button.Visibility" Value="Hidden"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=IsSelected}" Value="True">
+                                                                    <Setter Property="Button.Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="По умолчанию" Binding="{Binding ValueByDefault}" MinWidth="150" MaxWidth="450"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="250"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
