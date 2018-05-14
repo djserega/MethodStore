@@ -26,7 +26,7 @@ namespace MethodStore
             get { return _groupName; }
             set
             {
-                string tempValue = value.Trim();
+                string tempValue = value?.Trim();
                 if (_groupName != tempValue)
                     _groupName = tempValue;
             }
