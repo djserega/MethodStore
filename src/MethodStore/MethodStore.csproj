@@ -69,13 +69,16 @@
     <Compile Include="Files\FileTypeMethods.cs" />
     <Compile Include="Files\FileObjectMethods.cs" />
     <Compile Include="Files\FileParametersTypes.cs" />
-    <Compile Include="GlobalHotKeyManager.cs" />
+    <Compile Include="UnmanagedCode\GlobalHotKeyManager.cs" />
     <Compile Include="Models\ParametersTypes.cs" />
     <Compile Include="TextParser.cs" />
     <Compile Include="DirFile.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="Models\TypeMethods.cs" />
     <Compile Include="SubscriberWatcher.cs" />
+    <Compile Include="UnmanagedCode\KeyDownArgs.cs" />
+    <Compile Include="UnmanagedCode\KeyUpArgs.cs" />
+    <Compile Include="UnmanagedCode\LowLevelKeyboardListener.cs" />
     <Compile Include="UpdateFilesObjectMethod.cs" />
     <Compile Include="WindowObjectMethod.xaml.cs">
       <DependentUpon>WindowObjectMethod.xaml</DependentUpon>
