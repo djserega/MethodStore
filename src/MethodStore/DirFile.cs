@@ -11,37 +11,39 @@ namespace MethodStore
 {
     internal class DirFile
     {
-        private string _baseDirectory;
-        private string _pathData;
-        private string _pathDataFiles;
-        private string _fullNameFileTypeMethods;
-        private string _fullNameFileParametersTypes;
+        private readonly string _baseDirectory;
+        private readonly string _fullNameFileTypeMethods;
 
-        internal string PathData { get => _pathData;  }
-        internal string PathDataFiles { get => _pathDataFiles; }
-        internal string FullNameFileParametersTypes { get => _fullNameFileParametersTypes; }
+        internal string PathData { get; }
+        internal string PathDataFiles { get; }
+        internal string FullNameFileParametersTypes { get; }
+        internal string FullNameTextTemplate { get; }
 
         internal DirFile()
         {
             _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-            _pathData = Path.Combine(
+            PathData = Path.Combine(
                 _baseDirectory,
                 "Data");
-            CreateDirectory(_pathData);
+            CreateDirectory(PathData);
 
-            _pathDataFiles = Path.Combine(
-                _pathData,
+            PathDataFiles = Path.Combine(
+                PathData,
                 "Methods");
-            CreateDirectory(_pathDataFiles);
+            CreateDirectory(PathDataFiles);
 
             _fullNameFileTypeMethods = Path.Combine(
-                _pathData,
+                PathData,
                 "TypeMethods.txt");
 
-            _fullNameFileParametersTypes = Path.Combine(
-                _pathData,
+            FullNameFileParametersTypes = Path.Combine(
+                PathData,
                 "ParametersTypes.xml");
+
+            FullNameTextTemplate = Path.Combine(
+                PathData,
+                "MethodStore.st");
         }
 
         private void CreateDirectory(string path)

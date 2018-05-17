@@ -69,6 +69,7 @@
     <Compile Include="Files\FileTypeMethods.cs" />
     <Compile Include="Files\FileObjectMethods.cs" />
     <Compile Include="Files\FileParametersTypes.cs" />
+    <Compile Include="TextTemplate.cs" />
     <Compile Include="UnmanagedCode\GlobalHotKeyManager.cs" />
     <Compile Include="Models\ParametersTypes.cs" />
     <Compile Include="TextParser.cs" />

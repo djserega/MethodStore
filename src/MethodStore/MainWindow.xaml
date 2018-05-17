@@ -42,6 +42,9 @@
                         <Button x:Name="ButtonDeleteMethod" Content="Удалить" Background="LightSteelBlue" BorderBrush="Teal" Width="70"
                             Click="ButtonDeleteMethod_Click"/>
                         <Separator Width="3" Background="{x:Null}"/>
+                        <Button x:Name="ButtonUpdateFileST" Content="Обновить шаблон текста" Background="LightSteelBlue" BorderBrush="Teal" Width="160"
+                                Click="ButtonUpdateFileST_Click"/>
+                        <Separator Width="3" Background="{x:Null}"/>
                     </StackPanel>
                     <Separator Width="5" Background="{x:Null}"/>
                     <StackPanel Orientation="Horizontal">

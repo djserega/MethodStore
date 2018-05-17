@@ -45,6 +45,11 @@ namespace MethodStore
         public DateTime DateCreation { get; set; }
         public DateTime DateEdited { get; set; }
 
+        public bool AddToTextTemplate { get; set; }
+        public string Name { get; set; }
+        public string TextAutoCorrect { get; set; }
+        public bool AddToContextMenu { get; set; }
+        
         public string Path { get; set; }
         
         public ObjectMethod()

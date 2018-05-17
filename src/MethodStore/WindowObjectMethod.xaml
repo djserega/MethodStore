@@ -57,74 +57,122 @@
                 <Separator Height="1" Background="{x:Null}"/>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Вызов метода" MinWidth="90"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="TextBoxMethodInvokationString" Text="{Binding Path=MethodInvokationString}" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
-                                 Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='143'}"/>
-                        <Button x:Name="ButtonCopyToClipBoard" Content="Copy" Background="LightSteelBlue" BorderBrush="Teal" 
-                                Click="ButtonCopyToClipBoard_Click">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="FontWeight" Value="ExtraBold"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
 
-                <Separator Height="1" Background="{x:Null}"/>
+                    <StackPanel x:Name="StackPanelLeft" Orientation="Vertical"
+                                Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='400'}">
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Тип метода" MinWidth="90"/>
-                    <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
-                              SelectedItem="{Binding Path=TypeMethods}" 
-                              Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" 
-                              SelectionChanged="ComboBoxTypeMethods_SelectionChanged">
-                        <ComboBox.GroupStyle>
-                            <GroupStyle>
-                                <GroupStyle.HeaderTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Вызов метода" MinWidth="90"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="TextBoxMethodInvokationString" Text="{Binding Path=MethodInvokationString}" Background="LightSteelBlue" BorderBrush="Teal" IsReadOnly="True"
+                                         Width="{Binding Path=ActualWidth, ElementName=StackPanelLeft, Converter={local:ElementsFormConverter}, ConverterParameter='90'}"/>
+                                <Button x:Name="ButtonCopyToClipBoard" Content="Copy" Background="LightSteelBlue" BorderBrush="Teal" 
+                                        Click="ButtonCopyToClipBoard_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="FontWeight" Value="ExtraBold"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Separator Height="1" Background="{x:Null}"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Тип метода" MinWidth="90"/>
+                            <ComboBox x:Name="ComboBoxTypeMethods" Background="LightSteelBlue"
+                                      SelectedItem="{Binding Path=TypeMethods}" 
+                                      Width="{Binding Path=ActualWidth, ElementName=StackPanelLeft, Converter={local:ElementsFormConverter}, ConverterParameter='90'}" 
+                                      SelectionChanged="ComboBoxTypeMethods_SelectionChanged">
+                                <ComboBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ComboBox.GroupStyle>
+                                <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"/>
                                     </DataTemplate>
-                                </GroupStyle.HeaderTemplate>
-                            </GroupStyle>
-                        </ComboBox.GroupStyle>
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
 
-                <Separator Height="1" Background="{x:Null}"/>
+                        <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Модуль" MinWidth="90"/>
-                    <TextBox x:Name="TextBoxModule" Text="{Binding Path=Module, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal" 
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
-                             TextChanged="TextBoxModule_TextChanged" TabIndex="0"/>
-                </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Модуль" MinWidth="90"/>
+                            <TextBox x:Name="TextBoxModule" Text="{Binding Path=Module, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal" 
+                                     Width="{Binding Path=ActualWidth, ElementName=StackPanelLeft, Converter={local:ElementsFormConverter}, ConverterParameter='90'}"
+                                     TextChanged="TextBoxModule_TextChanged" TabIndex="0"/>
+                        </StackPanel>
 
-                <Separator Height="1" Background="{x:Null}"/>
+                        <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Имя метода" MinWidth="90"/>
-                    <TextBox x:Name="TextBoxMethodName" Text="{Binding Path=MethodName, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}"
-                             TextChanged="TextBoxMethodName_TextChanged" TabIndex="1"/>
-                </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Имя метода" MinWidth="90"/>
+                            <TextBox x:Name="TextBoxMethodName" Text="{Binding Path=MethodName, UpdateSourceTrigger=PropertyChanged}" Background="LightSteelBlue" BorderBrush="Teal"
+                                     Width="{Binding Path=ActualWidth, ElementName=StackPanelLeft, Converter={local:ElementsFormConverter}, ConverterParameter='90'}"
+                                     TextChanged="TextBoxMethodName_TextChanged" TabIndex="1"/>
+                        </StackPanel>
 
-                <Separator Height="1" Background="{x:Null}"/>
+                        <Separator Height="1" Background="{x:Null}"/>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Описание" MinWidth="90"/>
-                    <TextBox Text="{Binding Path=Description}" Background="LightSteelBlue" BorderBrush="Teal"
-                             Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='105'}" TabIndex="2"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Описание" MinWidth="90"/>
+                            <TextBox Text="{Binding Path=Description}" Background="LightSteelBlue" BorderBrush="Teal"
+                                     Width="{Binding Path=ActualWidth, ElementName=StackPanelLeft, Converter={local:ElementsFormConverter}, ConverterParameter='90'}" TabIndex="2"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <Separator Width="5" Background="{x:Null}"/>
+
+                    <StackPanel x:Name="StackPanelTopRight" Orientation="Vertical"
+                                Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='825'}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Включать в шаблоны текста" MinWidth="190"/>
+                            <CheckBox Background="LightSteelBlue" IsChecked="{Binding Path=AddToTextTemplate}"/>
+                        </StackPanel>
+                        
+                        <Separator Height="1" Background="{x:Null}"/>
+                        
+                        <StackPanel x:Name="StackPanelTextTemplate" Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Добавлять в контекстное меню" MinWidth="190"/>
+                                <CheckBox Background="LightSteelBlue" IsChecked="{Binding Path=AddToContextMenu}"/>
+                            </StackPanel>
+
+                            <Separator Height="1" Background="{x:Null}"/>
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Название" MinWidth="120"/>
+                                <TextBox Background="LightSteelBlue" Text="{Binding Path=Name}"
+                                    Width="{Binding Path=ActualWidth, ElementName=StackPanelTopRight, Converter={local:ElementsFormConverter}, ConverterParameter=120}"/>
+                            </StackPanel>
+
+                            <Separator Height="1" Background="{x:Null}"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Строка автозамены" MinWidth="120"/>
+                                <TextBox Background="LightSteelBlue" Text="{Binding Path=TextAutoCorrect}"
+                                    Width="{Binding Path=ActualWidth, ElementName=StackPanelTopRight, Converter={local:ElementsFormConverter}, ConverterParameter=120}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        
+                    </StackPanel>
+
                 </StackPanel>
 
                 <Separator Height="1" Background="{x:Null}"/>

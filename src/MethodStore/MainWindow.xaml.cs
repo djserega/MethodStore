@@ -379,5 +379,10 @@ namespace MethodStore
                 if (!string.IsNullOrWhiteSpace(objectMethod.MethodInvokationString))
                     Clipboard.SetText(objectMethod.MethodInvokationString);
         }
+
+        private void ButtonUpdateFileST_Click(object sender, RoutedEventArgs e)
+        {
+            new TextTemplate().UpdateFile();
+        }
     }
 }
