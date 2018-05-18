@@ -7,11 +7,10 @@
         xmlns:local="clr-namespace:MethodStore"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" 
-        ShowMinButton="False"
-        ShowMaxRestoreButton="False"
+        ShowMinButton="False" ShowMaxRestoreButton="False" Topmost="True"
         Background="Teal" x:Name="FormMessage"
         Title="Сообщение" Height="150" Width="300"
-        Loaded="FormMessage_Loaded">
+        Loaded="FormMessage_Loaded" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

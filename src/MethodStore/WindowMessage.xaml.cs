@@ -23,6 +23,9 @@ namespace MethodStore
 
         #region Fields
 
+        private double _left;
+        private double _top;
+
         private string _textMessage;
         private bool _question;
         private int _timer;
@@ -71,8 +74,16 @@ namespace MethodStore
 
         #endregion
 
+        #region Window events
+
         private void FormMessage_Loaded(object sender, RoutedEventArgs e)
         {
+            MainWindow _owner = (MainWindow)Application.Current.MainWindow;
+            _left = (_owner.Left + _owner.ActualWidth - (ActualWidth / 2)) / 2;
+            _top = (_owner.Top + _owner.ActualHeight - (ActualHeight / 2)) / 2;
+
+            SetPositionWindow();
+
             TextBlockMessage.Text = _textMessage;
 
             _textButtonOK = ButtonOK.Content.ToString();
@@ -82,6 +93,8 @@ namespace MethodStore
             if (_timer > 0)
                 StartTimerAsync();
         }
+
+        #endregion
 
         #region Button
 
@@ -130,6 +143,15 @@ namespace MethodStore
                 BindingOperations.GetBindingExpression(SeparatorButton, VisibilityProperty).UpdateTarget();
                 BindingOperations.GetBindingExpression(ButtonCancel, VisibilityProperty).UpdateTarget();
             }
+        }
+
+        private void SetPositionWindow(bool loaded = false)
+        {
+            if (Left < _left || loaded)
+                Left = _left;
+
+            if (Top < _top || loaded)
+                Top = _top;
         }
 
     }
