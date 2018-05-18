@@ -33,7 +33,7 @@ namespace MethodStore
 
         #region Properties
 
-        internal bool VisibleCancelCommand { get; private set; }
+        public Visibility VisibleCancelCommand { get; private set; }
 
         internal bool PressButtonOK { get; private set; }
         internal bool PressButtonCancel { get; private set; }
@@ -70,7 +70,6 @@ namespace MethodStore
         }
 
         #endregion
-
 
         private void FormMessage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -124,9 +123,12 @@ namespace MethodStore
         private void PrepareForm()
         {
             if (_question)
-            {
                 Title = "Вопрос";
-                VisibleCancelCommand = true;
+            else
+            {
+                VisibleCancelCommand = Visibility.Collapsed;
+                BindingOperations.GetBindingExpression(SeparatorButton, VisibilityProperty).UpdateTarget();
+                BindingOperations.GetBindingExpression(ButtonCancel, VisibilityProperty).UpdateTarget();
             }
         }
 

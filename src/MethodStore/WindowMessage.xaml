@@ -15,17 +15,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="GridTop">
-            <TextBlock x:Name="TextBlockMessage" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"
-                       Width="{Binding ElementName=GridTop, Path=ActualWidth}"
-                       Height="{Binding ElementName=GridTop, Path=ActualHeight}"/>
-        </Grid>
-        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+
+        <TextBlock x:Name="TextBlockMessage" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"
+                   MaxHeight="80" MaxWidth="280"/>
+
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <Button x:Name="ButtonOK" Content="OK" Width="75" Background="LightSteelBlue"
                     Click="ButtonOK_Click"/>
-            <Separator Width="5" Background="{x:Null}" Visibility="{Binding ElementName=FormMessage, Path=VisibleCancelCommand}"/>
+            <Separator x:Name="SeparatorButton" Width="5" Background="{x:Null}" Visibility="{Binding ElementName=FormMessage, Path=VisibleCancelCommand}"/>
             <Button x:Name="ButtonCancel" Content="Отмена" Width="75" Background="LightSteelBlue" Visibility="{Binding ElementName=FormMessage, Path=VisibleCancelCommand}" 
                     Click="ButtonCancel_Click"/>
         </StackPanel>
+        
     </Grid>
 </Controls:MetroWindow>
