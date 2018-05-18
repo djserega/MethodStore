@@ -34,6 +34,16 @@
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
 
+        <!--StackPanelTextTemplate-->
+        <Style x:Key="StackPanelTextTemplate" TargetType="{x:Type StackPanel}">
+            <Setter Property="StackPanel.IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=AddToTextTemplate}" Value="True">
+                    <Setter Property="StackPanel.IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
     </Controls:MetroWindow.Resources>
 
     <Grid>
@@ -138,15 +148,15 @@
 
                     <StackPanel x:Name="StackPanelTopRight" Orientation="Vertical"
                                 Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='825'}">
-
+                        
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Включать в шаблоны текста" MinWidth="190"/>
                             <CheckBox Background="LightSteelBlue" IsChecked="{Binding Path=AddToTextTemplate}"/>
                         </StackPanel>
                         
                         <Separator Height="1" Background="{x:Null}"/>
-                        
-                        <StackPanel x:Name="StackPanelTextTemplate" Orientation="Vertical">
+
+                        <StackPanel x:Name="StackPanelTextTemplate" Orientation="Vertical" Style="{StaticResource StackPanelTextTemplate}">
 
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Добавлять в контекстное меню" MinWidth="190"/>
