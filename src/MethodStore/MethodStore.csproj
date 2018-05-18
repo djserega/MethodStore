@@ -66,10 +66,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialog.cs" />
     <Compile Include="Files\FileTypeMethods.cs" />
     <Compile Include="Files\FileObjectMethods.cs" />
     <Compile Include="Files\FileParametersTypes.cs" />
     <Compile Include="TextTemplate.cs" />
+    <Compile Include="Timers.cs" />
     <Compile Include="UnmanagedCode\GlobalHotKeyManager.cs" />
     <Compile Include="Models\ParametersTypes.cs" />
     <Compile Include="TextParser.cs" />
@@ -81,6 +83,9 @@
     <Compile Include="UnmanagedCode\KeyUpArgs.cs" />
     <Compile Include="UnmanagedCode\LowLevelKeyboardListener.cs" />
     <Compile Include="UpdateFilesObjectMethod.cs" />
+    <Compile Include="WindowMessage.xaml.cs">
+      <DependentUpon>WindowMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowObjectMethod.xaml.cs">
       <DependentUpon>WindowObjectMethod.xaml</DependentUpon>
     </Compile>
@@ -98,6 +103,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WindowMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowObjectMethod.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

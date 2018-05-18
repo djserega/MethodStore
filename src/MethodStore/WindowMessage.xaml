@@ -1,0 +1,31 @@
+﻿<Controls:MetroWindow
+        x:Class="MethodStore.WindowMessage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MethodStore"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d" WindowStyle="ToolWindow"
+        Background="Teal" x:Name="FormMessage"
+        Title="Сообщение" Height="150" Width="300"
+        Loaded="FormMessage_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="GridTop">
+            <TextBlock x:Name="TextBlockMessage" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"
+                       Width="{Binding ElementName=GridTop, Path=ActualWidth}"
+                       Height="{Binding ElementName=GridTop, Path=ActualHeight}"/>
+        </Grid>
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button x:Name="ButtonOK" Content="OK" Width="75" Background="LightSteelBlue"
+                    Click="ButtonOK_Click"/>
+            <Separator Width="5" Background="{x:Null}" Visibility="{Binding ElementName=FormMessage, Path=VisibleCancelCommand}"/>
+            <Button x:Name="ButtonCancel" Content="Отмена" Width="75" Background="LightSteelBlue" Visibility="{Binding ElementName=FormMessage, Path=VisibleCancelCommand}" 
+                    Click="ButtonCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

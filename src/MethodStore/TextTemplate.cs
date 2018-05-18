@@ -14,7 +14,16 @@ namespace MethodStore
 
         internal void UpdateFile()
         {
-            UpdateFileTemplate(new FileInfo(_fullNameFileTemplate));
+            try
+            {
+                UpdateFileTemplate(new FileInfo(_fullNameFileTemplate));
+                Dialog.ShowMessage("Файл шаблонов обновлен.");
+            }
+            catch (Exception ex)
+            {
+                Dialog.ShowMessage($"Ошибка обновления файла шаблона.\n" +
+                    $"{ex.Message}");
+            }
         }
 
         private void UpdateFileTemplate(FileInfo fileInfo)
@@ -36,7 +45,11 @@ namespace MethodStore
                     i++;
 
                     stringBuilder.AppendLine($"{{0,");
-                    stringBuilder.AppendLine($"{{\"{item.Name}\",0,{Convert.ToInt16(item.AddToContextMenu)},\"{item.TextAutoCorrect}\",\"{item.MethodInvokationString}\"}}");
+                    stringBuilder.AppendLine($"{{\"{item.Name}\"," +
+                        $"0," +
+                        $"{Convert.ToInt16(item.AddToContextMenu)}," +
+                        $"\"{item.TextAutoCorrect}\"," +
+                        $"\"{item.MethodInvokationString}\"}}");
                     stringBuilder.Append($"}}");
                     if (list.Count != i)
                         stringBuilder.Append(",");
