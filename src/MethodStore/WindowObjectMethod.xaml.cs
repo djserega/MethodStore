@@ -36,11 +36,8 @@ namespace MethodStore
         private List<TypeMethods> _listTypeMethods = new List<TypeMethods>();
         private List<Parameter> _dataParameters;
 
-        private MainWindow _owner;
         private double _minLeft;
-        private double _maxLeft;
         private double _minTop;
-        private double _maxTop;
 
         #endregion
 
@@ -75,12 +72,10 @@ namespace MethodStore
 
         private void FormObjectMethod_Loaded(object sender, RoutedEventArgs e)
         {
-            _owner = (MainWindow)Owner;
+            MainWindow _owner = (MainWindow)Application.Current.MainWindow;
             _minLeft = _owner.Left + 10;
-            _maxLeft = _owner.Left + _owner.ActualWidth - 40;
             _minTop = _owner.Top + 10;
-            _maxTop = _owner.Top + _owner.ActualHeight - 40;
-
+            
             SetPositionWindow(true);
 
             TextBoxModule.Focus();
@@ -212,13 +207,9 @@ namespace MethodStore
         {
             if (Left < _minLeft || loaded)
                 Left = _minLeft;
-            else if (Left > _maxLeft)
-                Left = _maxLeft;
 
             if (Top < _minTop || loaded)
                 Top = _minTop;
-            else if (Top > _maxTop)
-                Top = _maxTop;
         }
 
         private void _refreshDataGrid_RefreshDataGrid()
@@ -264,15 +255,5 @@ namespace MethodStore
 
         }
 
-        private void TextBoxRowType_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (DataGridParameters.SelectedItem is Parameter rowParameter)
-            {
-                if (sender is TextBox rowTextBox)
-                {
-                    rowParameter.Type = rowTextBox.Text;
-                }
-            }
-        }
     }
 }

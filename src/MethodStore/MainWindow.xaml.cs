@@ -370,7 +370,7 @@ namespace MethodStore
                 Owner = this,
                 ParametersTypes = _parametersTypes
             };
-            formObject.ShowDialog();
+            formObject.Show();
         }
 
         private void MenuItemCopyToClipboard_Click(object sender, RoutedEventArgs e)

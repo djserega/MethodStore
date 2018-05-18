@@ -8,10 +8,9 @@
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
         Title="Метод" Height="600" Width="1200"
-        Background="Teal"
+        Background="Teal" Topmost="True"
         Loaded="FormObjectMethod_Loaded"
-        Closed="FormObjectMethod_Closed"
-        LocationChanged="FormObjectMethod_LocationChanged">
+        Closed="FormObjectMethod_Closed">
 
     <Controls:MetroWindow.CommandBindings>
         <CommandBinding x:Name="WindowClose" Executed="WindowCommandCloseForm_Executed" Command="ApplicationCommands.Close"/>
