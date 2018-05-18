@@ -43,7 +43,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        
+
     </Controls:MetroWindow.Resources>
 
     <Grid>
@@ -148,12 +148,12 @@
 
                     <StackPanel x:Name="StackPanelTopRight" Orientation="Vertical"
                                 Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='825'}">
-                        
+
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Включать в шаблоны текста" MinWidth="190"/>
                             <CheckBox Background="LightSteelBlue" IsChecked="{Binding Path=AddToTextTemplate}"/>
                         </StackPanel>
-                        
+
                         <Separator Height="1" Background="{x:Null}"/>
 
                         <StackPanel x:Name="StackPanelTextTemplate" Orientation="Vertical" Style="{StaticResource StackPanelTextTemplate}">
@@ -164,7 +164,7 @@
                             </StackPanel>
 
                             <Separator Height="1" Background="{x:Null}"/>
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Название" MinWidth="120"/>
                                 <TextBox Background="LightSteelBlue" Text="{Binding Path=Name}"
@@ -180,7 +180,7 @@
                             </StackPanel>
 
                         </StackPanel>
-                        
+
                     </StackPanel>
 
                 </StackPanel>
@@ -200,7 +200,8 @@
                             <Separator Width="1" Background="{x:Null}"/>
                         </StackPanel>
                         <Separator Height="0" Background="{x:Null}"/>
-                        <DataGrid x:Name="DataGridParameters" Background="LightSteelBlue" CanUserAddRows="False" CanUserDeleteRows="False"
+                        <DataGrid x:Name="DataGridParameters" Background="LightSteelBlue" 
+                                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False"
                                   AutoGenerateColumns="False" HorizontalAlignment="Left"
                                   ColumnHeaderStyle="{StaticResource DataGridStyleColumnHeader}"
                                   RowStyle="{StaticResource DataGridStyleRow}"
@@ -209,27 +210,24 @@
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="По значению" Binding="{Binding ByValue}" CanUserResize="False"/>
                                 <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="300"/>
-                                <DataGridTemplateColumn x:Name="ColumnType" Header="Тип" MinWidth="150" MaxWidth="450">
+                                <DataGridTextColumn x:Name="ColumnType" Header="Тип" MinWidth="150" MaxWidth="450" Binding="{Binding Type}" 
+                                                         Width="{Binding Path=ActualWidth, ElementName=ColumnType, Converter={local:ElementsFormConverter}, ConverterParameter=28}"/>
+                                <DataGridTemplateColumn x:Name="ColumnTypeButton" Width="25" CanUserReorder="False" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <DockPanel>
-                                                <TextBox x:Name="TextBoxRowType" Text="{Binding Type}" Background="LightSteelBlue" BorderBrush="LightSteelBlue"
-                                                         Width="{Binding Path=ActualWidth, ElementName=ColumnType, Converter={local:ElementsFormConverter}, ConverterParameter=28}"
-                                                         TextChanged="TextBoxRowType_TextChanged"/>
-                                                <Button x:Name="ButtonOpenFormParametersTypes" Content="..." Background="LightSteelBlue" BorderBrush="{x:Null}" Width="25" HorizontalAlignment="Right"
+                                            <Button x:Name="ButtonOpenFormParametersTypes" Content="..." Background="LightSteelBlue" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="22"
                                                         Click="ButtonOpenFormParametersTypes_Click">
-                                                    <Button.Style>
-                                                        <Style>
-                                                            <Setter Property="Button.Visibility" Value="Hidden"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=IsSelected}" Value="True">
-                                                                    <Setter Property="Button.Visibility" Value="Visible"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Button.Style>
-                                                </Button>
-                                            </DockPanel>
+                                                <Button.Style>
+                                                    <Style>
+                                                        <Setter Property="Button.Visibility" Value="Hidden"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=IsSelected}" Value="True">
+                                                                <Setter Property="Button.Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
