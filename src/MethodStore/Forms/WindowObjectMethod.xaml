@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MethodStore"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
         Title="Метод" Height="600" Width="1200"
@@ -208,9 +209,31 @@
                                   Height="{Binding Path=ActualHeight, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='300'}">
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Header="По значению" Binding="{Binding ByValue}" CanUserResize="False"/>
-                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="300"/>
+                                <DataGridTextColumn x:Name="ParametersColumnName" Header="Имя" Binding="{Binding Name}" MinWidth="100" MaxWidth="300">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                            <Setter Property="ToolTip" Value="{Binding Name}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
                                 <DataGridTextColumn x:Name="ColumnType" Header="Тип" MinWidth="150" MaxWidth="450" Binding="{Binding Type}" 
-                                                         Width="{Binding Path=ActualWidth, ElementName=ColumnType, Converter={local:ElementsFormConverter}, ConverterParameter=28}"/>
+                                                    Width="{Binding Path=ActualWidth, ElementName=ColumnType, Converter={local:ElementsFormConverter}, ConverterParameter=28}">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                            <Setter Property="ToolTip" Value="{Binding Type}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
                                 <DataGridTemplateColumn x:Name="ColumnTypeButton" Width="25" CanUserReorder="False" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -230,8 +253,30 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="По умолчанию" Binding="{Binding ValueByDefault}" MinWidth="150" MaxWidth="450"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="250"/>
+                                <DataGridTextColumn Header="По умолчанию" Binding="{Binding ValueByDefault}" MinWidth="150" MaxWidth="450">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                            <Setter Property="ToolTip" Value="{Binding ValueByDefault}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="150" MaxWidth="250">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                            <Setter Property="ToolTip" Value="{Binding Description}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
