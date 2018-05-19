@@ -26,7 +26,7 @@ namespace MethodStore.Files
             if (!CreatePathDataFiles())
                 return null;
 
-            List<FileInfo> listFiles = new DirectoryInfo(PathListFiles).GetFiles().ToList();
+            List<FileInfo> listFiles = new DirectoryInfo(PathListFiles).GetFiles("*.json").ToList();
             listFiles.Sort((a, b) => b.LastWriteTimeUtc.CompareTo(a.LastWriteTimeUtc));
 
             return listFiles;
