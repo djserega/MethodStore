@@ -23,7 +23,7 @@
             <Setter Property="Background" Value="LightSteelBlue"/>
         </Style>
     </Controls:MetroWindow.Resources>
-    
+
     <Grid x:Name="MainGrid">
         <StackPanel Orientation="Horizontal">
             <Separator Width="5" Background="{x:Null}"/>
@@ -104,48 +104,65 @@
                         <DataGridTextColumn Header="Тип модуля" Binding="{Binding TypeMethodName}" MinWidth="100" MaxWidth="150">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
-                                    <Setter Property="ToolTip" Value="{Binding TypeMethodName}"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <ToolTip Content="{Binding TypeMethodName}" Background="#FF6ABAC9"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding TypeMethodName}" Value="{x:Static s:String.Empty}">
                                             <Setter Property="IsEnabled" Value="False"/>
-                                        </Trigger>
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MinWidth="250" MaxWidth="400">
+                        <DataGridTextColumn x:Name="dataGridTextColumn" Header="Модуль" Binding="{Binding Module}" MinWidth="250" MaxWidth="400">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
-                                    <Setter Property="ToolTip" Value="{Binding Module}"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <ToolTip Content="{Binding Module}" Background="#FF6ABAC9" IsEnabled="{Binding ModuleIsFilled}" >
+                                            </ToolTip>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding Module}" Value="{x:Static s:String.Empty}">
                                             <Setter Property="IsEnabled" Value="False"/>
-                                        </Trigger>
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MinWidth="250" MaxWidth="400">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
-                                    <Setter Property="ToolTip" Value="{Binding MethodName}"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <ToolTip Content="{Binding MethodName}" Background="#FF6ABAC9"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding MethodName}" Value="{x:Static s:String.Empty}">
                                             <Setter Property="IsEnabled" Value="False"/>
-                                        </Trigger>
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="350" MaxWidth="500">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
-                                    <Setter Property="ToolTip" Value="{Binding Description}"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <ToolTip Content="{Binding Description}" Background="#FF6ABAC9"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--<Style.Triggers>
+                                        <DataTrigger Binding="{Binding Description}" Value="{x:Static s:String.Empty}">
                                             <Setter Property="IsEnabled" Value="False"/>
-                                        </Trigger>
-                                    </Style.Triggers>
+                                        </DataTrigger>
+                                    </Style.Triggers>-->
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
