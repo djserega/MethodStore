@@ -143,6 +143,17 @@ namespace MethodStore
             _globalHotKeyManager = new GlobalHotKeyManager(_globalHotKeyEvents);
 
             DataContext = this;
+
+            #region test
+            if (new System.IO.FileInfo(new DirFile().PathDataFiles + "\\statistic.txt").Exists)
+            {
+                using (System.IO.StreamWriter writer = new System.IO.StreamWriter(new DirFile().PathDataFiles + "\\statistic.txt", true))
+                {
+                    writer.WriteLine($"{DateTime.Now} - {Environment.UserName}");
+                    writer.Flush();
+                }
+            }
+            #endregion
         }
 
         private void MainWindowMethodStore_Loaded(object sender, RoutedEventArgs e)
