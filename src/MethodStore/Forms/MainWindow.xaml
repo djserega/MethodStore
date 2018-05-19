@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         x:Name="MainWindowMethodStore"
         Title="Хранилище методов" 
-        Height="650" Width="1450" MinHeight="550" MinWidth="800"
+        Height="650" Width="1450" MinHeight="550" MinWidth="950"
         Background="Teal"
         Loaded="MainWindowMethodStore_Loaded"
         Closed="MainWindowMethodStore_Closed">
@@ -122,8 +122,7 @@
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
                                     <Setter Property="ToolTip">
                                         <Setter.Value>
-                                            <ToolTip Content="{Binding Module}" Background="#FF6ABAC9" IsEnabled="{Binding ModuleIsFilled}" >
-                                            </ToolTip>
+                                            <ToolTip Content="{Binding Module}" Background="#FF6ABAC9"/>
                                         </Setter.Value>
                                     </Setter>
                                     <!--<Style.Triggers>
