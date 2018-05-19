@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         x:Name="MainWindowMethodStore"
         Title="Хранилище методов" 
-        Height="650" Width="1450" MinHeight="550" MinWidth="950"
+        Height="650" Width="1250" MinHeight="550" MinWidth="950"
         Background="Teal"
         Loaded="MainWindowMethodStore_Loaded"
         Closed="MainWindowMethodStore_Closed">
