@@ -8,7 +8,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         x:Name="FormObjectMethod"
-        Title="Метод" Height="600" Width="1200"
+        Title="Метод" Height="600" Width="900" MinHeight="400" MinWidth="800" 
         Background="Teal" Topmost="True"
         Loaded="FormObjectMethod_Loaded"
         Closed="FormObjectMethod_Closed">
@@ -147,7 +147,7 @@
                     <Separator Width="5" Background="{x:Null}"/>
 
                     <StackPanel x:Name="StackPanelTopRight" Orientation="Vertical"
-                                Width="{Binding Path=ActualWidth, ElementName=FormObjectMethod, Converter={local:ElementsFormConverter}, ConverterParameter='825'}">
+                                Width="375">
 
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Включать в шаблоны текста" MinWidth="190"/>
@@ -167,16 +167,14 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Название" MinWidth="120"/>
-                                <TextBox Background="LightSteelBlue" Text="{Binding Path=Name}"
-                                    Width="{Binding Path=ActualWidth, ElementName=StackPanelTopRight, Converter={local:ElementsFormConverter}, ConverterParameter=120}"/>
+                                <TextBox Background="LightSteelBlue" Text="{Binding Path=Name}" Width="255"/>
                             </StackPanel>
 
                             <Separator Height="1" Background="{x:Null}"/>
 
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Строка автозамены" MinWidth="120"/>
-                                <TextBox Background="LightSteelBlue" Text="{Binding Path=TextAutoCorrect}"
-                                    Width="{Binding Path=ActualWidth, ElementName=StackPanelTopRight, Converter={local:ElementsFormConverter}, ConverterParameter=120}"/>
+                                <TextBox Background="LightSteelBlue" Text="{Binding Path=TextAutoCorrect}" Width="255"/>
                             </StackPanel>
 
                         </StackPanel>
