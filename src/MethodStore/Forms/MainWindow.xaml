@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MethodStore"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         x:Name="MainWindowMethodStore"
         Title="Хранилище методов" 
@@ -100,10 +101,54 @@
                     </DataGrid.InputBindings>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Тип модуля" Binding="{Binding TypeMethodName}" MinWidth="100" MaxWidth="150" />
-                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MinWidth="250" MaxWidth="400"/>
-                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MinWidth="250" MaxWidth="400"/>
-                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="350" MaxWidth="500"/>
+                        <DataGridTextColumn Header="Тип модуля" Binding="{Binding TypeMethodName}" MinWidth="100" MaxWidth="150">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                    <Setter Property="ToolTip" Value="{Binding TypeMethodName}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Модуль" Binding="{Binding Module}" MinWidth="250" MaxWidth="400">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                    <Setter Property="ToolTip" Value="{Binding Module}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Метод" Binding="{Binding MethodName}" MinWidth="250" MaxWidth="400">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                    <Setter Property="ToolTip" Value="{Binding MethodName}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding Description}" MinWidth="350" MaxWidth="500">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MetroDataGridCell}">
+                                    <Setter Property="ToolTip" Value="{Binding Description}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ToolTip" Value="{x:Static s:String.Empty}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                         <!--<DataGridTextColumn Header="Изменено" Binding="{Binding DateEdited, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>
                         <DataGridTextColumn Header="Создано" Binding="{Binding DateCreation, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" MinWidth="110"/>-->
                     </DataGrid.Columns>
