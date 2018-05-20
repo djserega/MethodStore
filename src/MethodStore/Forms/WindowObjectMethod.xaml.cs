@@ -256,7 +256,14 @@ namespace MethodStore
             {
                 ParametersTypes = ParametersTypes
             };
-            form.Show();
+            form.ShowDialog();
+
+            if (form.PressButton)
+                if (DataGridParameters.SelectedItem is Parameter parameter)
+                {
+                    parameter.Type = form.SelectedTypes;
+                    SetItemSourceDataGridParameters();
+                }
         }
 
     }

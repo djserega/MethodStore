@@ -17,8 +17,7 @@
                 <Separator Width="1" Background="{x:Null}"/>
                 <StackPanel Orientation="Horizontal">
                     <CheckBox x:Name="CheckBoxTree" IsChecked="{Binding IsChecked}" Uid="{Binding Id}" Background="LightSteelBlue"
-                              PreviewMouseLeftButtonDown="CheckBoxTree_PreviewMouseLeftButtonDown"
-                              MouseLeftButtonDown="CheckBoxTree_MouseLeftButtonDown"/>
+                              PreviewMouseLeftButtonDown="CheckBoxTree_PreviewMouseLeftButtonDown"/>
                     <Separator Width="1" Background="{x:Null}"/>
                     <TextBlock Text="{Binding Text}"/>
                 </StackPanel>
@@ -30,6 +29,13 @@
     </Controls:MetroWindow.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
+
+            <StackPanel Orientation="Horizontal">
+                <Separator Width="3" Background="{x:Null}"/>
+                <Button x:Name="ButtonSelect" Content="Выбрать" Background="LightSteelBlue" Click="ButtonSelect_Click"/>
+            </StackPanel>
+
+            <Separator Height="1" Background="{x:Null}"/>
             
             <StackPanel Orientation="Horizontal">
                 <Label Content="Выбранные типы" MinWidth="110"/>

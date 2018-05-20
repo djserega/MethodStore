@@ -24,7 +24,8 @@ namespace MethodStore
     {
         private UpdateSelectedParameterTypesEvents _updateSelectedParameterTypes = new UpdateSelectedParameterTypesEvents();
 
-        string _selectedTypes;
+        internal string SelectedTypes { get; private set; }
+        internal bool PressButton { get; private set; }
 
         internal ParametersTypes ParametersTypes { get; set; }
         private TreeTypeParameters _treeType;
@@ -75,12 +76,14 @@ namespace MethodStore
                     }
                 }
             }
-            TextBoxSelectedTypes.Text = stringBuilder.ToString();
+            SelectedTypes = stringBuilder.ToString();
+            TextBoxSelectedTypes.Text = SelectedTypes;
         }
 
-        private void CheckBoxTree_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ButtonSelect_Click(object sender, RoutedEventArgs e)
         {
-            //SetSelectedTypes();
+            PressButton = true;
+            Close();
         }
     }
 }
