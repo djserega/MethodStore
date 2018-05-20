@@ -11,6 +11,7 @@
         Title="Хранилище методов" 
         Height="650" Width="1250" MinHeight="550" MinWidth="950"
         Background="Teal"
+        Icon="/./MethodStore.ico" WindowStartupLocation="CenterScreen"
         Loaded="MainWindowMethodStore_Loaded"
         Closed="MainWindowMethodStore_Closed">
 
