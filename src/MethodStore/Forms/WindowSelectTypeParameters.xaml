@@ -17,7 +17,8 @@
                 <Separator Width="1" Background="{x:Null}"/>
                 <StackPanel Orientation="Horizontal">
                     <CheckBox x:Name="CheckBoxTree" IsChecked="{Binding IsChecked}" Uid="{Binding Id}" Background="LightSteelBlue"
-                          PreviewMouseLeftButtonDown="CheckBoxTree_PreviewMouseLeftButtonDown"/>
+                              PreviewMouseLeftButtonDown="CheckBoxTree_PreviewMouseLeftButtonDown"
+                              MouseLeftButtonDown="CheckBoxTree_MouseLeftButtonDown"/>
                     <Separator Width="1" Background="{x:Null}"/>
                     <TextBlock Text="{Binding Text}"/>
                 </StackPanel>
@@ -32,7 +33,7 @@
             
             <StackPanel Orientation="Horizontal">
                 <Label Content="Выбранные типы" MinWidth="110"/>
-                <TextBox Background="LightSteelBlue"
+                <TextBox x:Name="TextBoxSelectedTypes" Background="LightSteelBlue" IsReadOnly="True"
                     Width="{Binding ElementName=FormSelectTypeParameters, Path=ActualWidth, Converter={local:ElementsFormConverter}, ConverterParameter='120'}"/>
             </StackPanel>
 

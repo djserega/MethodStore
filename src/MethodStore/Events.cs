@@ -66,4 +66,20 @@ namespace MethodStore
         }
     }
 
+
+    internal delegate void UpdateSelectedParameterTypes();
+
+    internal class UpdateSelectedParameterTypesEvents : EventArgs
+    {
+        internal event UpdateSelectedParameterTypes UpdateSelectedParameterTypes;
+
+        internal void EvokeUpdateSelectedParameterTypes()
+        {
+            if (UpdateSelectedParameterTypes == null)
+                return;
+
+            UpdateSelectedParameterTypes();
+        }   
+    }
+
 }

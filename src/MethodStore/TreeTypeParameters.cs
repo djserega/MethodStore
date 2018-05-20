@@ -2,11 +2,14 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 
 namespace MethodStore
 {
     public class TreeTypeParameters : INotifyPropertyChanged
     {
+        private UpdateSelectedParameterTypesEvents _updateSelectedParameterTypes;
+
         private ObservableCollection<TreeTypeParameters> _children = new ObservableCollection<TreeTypeParameters>();
         private ObservableCollection<TreeTypeParameters> _parent = new ObservableCollection<TreeTypeParameters>();
         private string _text;
@@ -63,10 +66,16 @@ namespace MethodStore
             }
         }
 
+        internal string SelectedTypes { get; private set; }
+
+
         internal string CurrentId { set => _currentId = value; }
 
-        internal TreeTypeParameters()
+        internal TreeTypeParameters(UpdateSelectedParameterTypesEvents updateSelectedParameterTypesEvents = null)
         {
+            if (updateSelectedParameterTypesEvents != null)
+                _updateSelectedParameterTypes = updateSelectedParameterTypesEvents;
+
             _id = Guid.NewGuid().ToString();
             Tree = new ObservableCollection<TreeTypeParameters>();
         }
@@ -94,6 +103,8 @@ namespace MethodStore
                         CheckChildAndParent(_parent, _children, _isChecked);
                     if (_parent.Count > 0 && _children.Count == 0)
                         CheckParentNodes(_parent);
+
+                    _updateSelectedParameterTypes.EvokeUpdateSelectedParameterTypes();
                 }
             }
         }
@@ -151,11 +162,11 @@ namespace MethodStore
 
             foreach (string itemType in parametersTypes.UniqueTypes)
             {
-                var levelTypes = new TreeTypeParameters() { Text = itemType };
+                var levelTypes = new TreeTypeParameters(_updateSelectedParameterTypes) { Text = itemType };
 
                 foreach (string itemName in parametersTypes.DictionaryType[itemType])
                 {
-                    var levelNames = new TreeTypeParameters() { Text = itemName };
+                    var levelNames = new TreeTypeParameters(_updateSelectedParameterTypes) { Text = itemName };
 
                     levelTypes.Children.Add(levelNames);
                     levelNames.Parent.Add(levelTypes);

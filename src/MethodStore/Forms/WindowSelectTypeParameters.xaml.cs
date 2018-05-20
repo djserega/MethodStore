@@ -22,24 +22,65 @@ namespace MethodStore
     /// </summary>
     public partial class WindowSelectTypeParameters : MetroWindow
     {
+        private UpdateSelectedParameterTypesEvents _updateSelectedParameterTypes = new UpdateSelectedParameterTypesEvents();
+
+        string _selectedTypes;
+
         internal ParametersTypes ParametersTypes { get; set; }
-        internal TreeTypeParameters TreeType { get; private set; }
+        private TreeTypeParameters _treeType;
 
         internal WindowSelectTypeParameters()
         {
             InitializeComponent();
+
+            _updateSelectedParameterTypes.UpdateSelectedParameterTypes += _updateSelectedParameterTypes_UpdateSelectedParameterTypes;
+        }
+
+        private void _updateSelectedParameterTypes_UpdateSelectedParameterTypes()
+        {
+            SetSelectedTypes();
         }
 
         private void CheckBoxTree_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            TreeType.SetCurrentID(((CheckBox)sender).Uid);
+            _treeType.SetCurrentID(((CheckBox)sender).Uid);
         }
 
         private void FormSelectTypeParameters_Loaded(object sender, RoutedEventArgs e)
         {
-            TreeType = new TreeTypeParameters();
-            TreeType.FillingTree(ParametersTypes);
-            TreeViewType.ItemsSource = TreeType.Tree;
+            _treeType = new TreeTypeParameters(_updateSelectedParameterTypes);
+            _treeType.FillingTree(ParametersTypes);
+            TreeViewType.ItemsSource = _treeType.Tree;
+        }
+
+
+        private void SetSelectedTypes()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (TreeTypeParameters itemType in _treeType.Tree)
+            {
+                foreach (TreeTypeParameters itemName in itemType.Children)
+                {
+                    if (itemName.IsChecked == true)
+                    {
+                        if (stringBuilder.Length != 0)
+                            stringBuilder.Append(", ");
+
+                        if (itemType.Text != "Примитивные типы")
+                        {
+                            stringBuilder.Append(itemType.Text);
+                            stringBuilder.Append(".");
+                        }
+                        stringBuilder.Append(itemName.Text);
+                    }
+                }
+            }
+            TextBoxSelectedTypes.Text = stringBuilder.ToString();
+        }
+
+        private void CheckBoxTree_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //SetSelectedTypes();
         }
     }
 }
