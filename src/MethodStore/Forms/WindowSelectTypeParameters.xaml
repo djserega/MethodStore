@@ -13,10 +13,14 @@
         Loaded="FormSelectTypeParameters_Loaded">
     <Controls:MetroWindow.Resources>
         <HierarchicalDataTemplate DataType="{x:Type local:TreeTypeParameters}" ItemsSource="{Binding Children}">
-            <StackPanel Orientation="Horizontal">
-                <CheckBox x:Name="CheckBoxTree" IsChecked="{Binding IsChecked}" Uid="{Binding Id}" Background="LightSteelBlue"
+            <StackPanel Orientation="Vertical">
+                <Separator Width="1" Background="{x:Null}"/>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="CheckBoxTree" IsChecked="{Binding IsChecked}" Uid="{Binding Id}" Background="LightSteelBlue"
                           PreviewMouseLeftButtonDown="CheckBoxTree_PreviewMouseLeftButtonDown"/>
-                <TextBlock Text="{Binding Text}"/>
+                    <Separator Width="1" Background="{x:Null}"/>
+                    <TextBlock Text="{Binding Text}"/>
+                </StackPanel>
             </StackPanel>
         </HierarchicalDataTemplate>
         <Style TargetType="TreeViewItem">
