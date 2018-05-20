@@ -72,6 +72,7 @@
     <Compile Include="Files\FileParametersTypes.cs" />
     <Compile Include="TextTemplate.cs" />
     <Compile Include="Timers.cs" />
+    <Compile Include="TreeTypeParameters.cs" />
     <Compile Include="UnmanagedCode\GlobalHotKeyManager.cs" />
     <Compile Include="Models\ParametersTypes.cs" />
     <Compile Include="TextParser.cs" />
@@ -88,6 +89,9 @@
     </Compile>
     <Compile Include="Forms\WindowObjectMethod.xaml.cs">
       <DependentUpon>WindowObjectMethod.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowSelectTypeParameters.xaml.cs">
+      <DependentUpon>WindowSelectTypeParameters.xaml</DependentUpon>
     </Compile>
     <Page Include="Forms\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\WindowObjectMethod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowSelectTypeParameters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

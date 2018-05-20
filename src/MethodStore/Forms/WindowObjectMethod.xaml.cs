@@ -252,7 +252,11 @@ namespace MethodStore
 
         private void ButtonOpenFormParametersTypes_Click(object sender, RoutedEventArgs e)
         {
-
+            WindowSelectTypeParameters form = new WindowSelectTypeParameters()
+            {
+                ParametersTypes = ParametersTypes
+            };
+            form.Show();
         }
 
     }
