@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Background="Teal"
         x:Name="FormSelectTypeParameters"
-        Title="WindowSelectTypeParameters" Height="450" Width="800"
+        Title="Выбор типов параметра" Height="450" Width="800"
         Loaded="FormSelectTypeParameters_Loaded">
     <Controls:MetroWindow.Resources>
         <HierarchicalDataTemplate DataType="{x:Type local:TreeTypeParameters}" ItemsSource="{Binding Children}">
