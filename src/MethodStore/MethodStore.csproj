@@ -90,7 +90,7 @@
     <Compile Include="Forms\WindowObjectMethod.xaml.cs">
       <DependentUpon>WindowObjectMethod.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowSelectTypeParameters.xaml.cs">
+    <Compile Include="Forms\WindowSelectTypeParameters.xaml.cs">
       <DependentUpon>WindowSelectTypeParameters.xaml</DependentUpon>
     </Compile>
     <Page Include="Forms\MainWindow.xaml">
@@ -115,7 +115,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowSelectTypeParameters.xaml">
+    <Page Include="Forms\WindowSelectTypeParameters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
