@@ -63,15 +63,15 @@ namespace MethodStore
             }
         }
 
-        public string CurrentId { set => _currentId = value; }
+        internal string CurrentId { set => _currentId = value; }
 
-        public TreeTypeParameters()
+        internal TreeTypeParameters()
         {
             _id = Guid.NewGuid().ToString();
             Tree = new ObservableCollection<TreeTypeParameters>();
         }
 
-        public ObservableCollection<TreeTypeParameters> Tree { get; private set; }
+        internal ObservableCollection<TreeTypeParameters> Tree { get; private set; }
 
         internal void SetCurrentID(string currentId)
         {

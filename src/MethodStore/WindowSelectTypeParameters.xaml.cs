@@ -23,9 +23,9 @@ namespace MethodStore
     public partial class WindowSelectTypeParameters : MetroWindow
     {
         internal ParametersTypes ParametersTypes { get; set; }
-        public TreeTypeParameters TreeType { get; private set; }
+        internal TreeTypeParameters TreeType { get; private set; }
 
-        public WindowSelectTypeParameters()
+        internal WindowSelectTypeParameters()
         {
             InitializeComponent();
         }
