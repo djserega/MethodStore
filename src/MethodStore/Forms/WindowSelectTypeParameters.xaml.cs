@@ -96,12 +96,15 @@ namespace MethodStore
                     }
                 }
 
-                var children = _treeType.Tree.First(f => f.Text == nameParent).Children;
-
-                for (int i = 0; i < children.Count; i++)
+                if (!string.IsNullOrEmpty(nameParent))
                 {
-                    if (children[i].Text == nameChildren)
-                        children[i].IsChecked = true;
+                    var children = _treeType.Tree.First(f => f.Text == nameParent).Children;
+
+                    for (int i = 0; i < children.Count; i++)
+                    {
+                        if (children[i].Text == nameChildren)
+                            children[i].IsChecked = true;
+                    }
                 }
             }
         }
