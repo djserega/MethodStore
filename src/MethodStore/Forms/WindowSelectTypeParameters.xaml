@@ -30,6 +30,8 @@
     <Grid>
         <StackPanel Orientation="Vertical">
 
+            <Separator Height="1" Background="{x:Null}"/>
+            
             <StackPanel Orientation="Horizontal">
                 <Separator Width="3" Background="{x:Null}"/>
                 <Button x:Name="ButtonSelect" Content="Выбрать" Background="LightSteelBlue" Click="ButtonSelect_Click"/>
@@ -49,8 +51,10 @@
                 <Label Content="Дерево типов" MinWidth="110"/>
                 <TreeView x:Name="TreeViewType" Background="LightSteelBlue"
                           Width="{Binding ElementName=FormSelectTypeParameters, Path=ActualWidth, Converter={local:ElementsFormConverter}, ConverterParameter='120'}"
-                          Height="{Binding ElementName=FormSelectTypeParameters, Path=ActualHeight, Converter={local:ElementsFormConverter}, ConverterParameter='65'}"/>
+                          Height="{Binding ElementName=FormSelectTypeParameters, Path=ActualHeight, Converter={local:ElementsFormConverter}, ConverterParameter='110'}"/>
             </StackPanel>
+
+            <Separator Height="1" Background="{x:Null}"/>
             
         </StackPanel>
     </Grid>
