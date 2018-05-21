@@ -23,26 +23,13 @@ namespace MethodStore.Files
             if (!fileInfo.Exists)
                 return null;
 
-            List<string> listType = new List<string>() { "Примитивные типы" };
-            Dictionary<string, List<string>> keysType = new Dictionary<string, List<string>>()
-            {
-                {
-                    "Примитивные типы",
-                    new List<string>()
-                    {
-                        "Null",
-                        "Неопределено",
-                        "Число",
-                        "Строка",
-                        "Дата",
-                        "Булево"
-                    }
-                }
-            };
+            List<string> listType = new List<string>() { "Примитивные типы", "Универсальные коллекции значений" };
+            Dictionary<string, List<string>> keysType = IninializeDictionatyTypeName();
 
             Dictionary<string, string> dictionaryTranslate = GetTranslateTypes();
             Dictionary<string, bool> usingType = GetUsingTypes();
 
+            #region Read file types
             using (XmlReader xmlReader = XmlReader.Create(FullNameFileTypes))
             {
                 while (xmlReader.Read())
@@ -91,11 +78,10 @@ namespace MethodStore.Files
                 }
                 xmlReader.Close();
             }
+            #endregion
 
             foreach (var item in keysType)
-            {
                 item.Value.Sort();
-            }
 
             ParametersTypes types = new ParametersTypes()
             {
@@ -104,6 +90,41 @@ namespace MethodStore.Files
             };
 
             return types;
+        }
+
+        internal Dictionary<string, List<string>> IninializeDictionatyTypeName()
+        {
+            Dictionary<string, List<string>> keysType = new Dictionary<string, List<string>>()
+            {
+                {
+                    "Примитивные типы",
+                    new List<string>()
+                    {
+                        "Null",
+                        "Неопределено",
+                        "Число",
+                        "Строка",
+                        "Дата",
+                        "Булево"
+                    }
+                },
+                {
+                    "Универсальные коллекции значений",
+                    new List<string>()
+                    {
+                        "Массив",
+                        "Структура",
+                        "Соответствие",
+                        "Список значений",
+                        "Таблица значений",
+                        "Дерево значений",
+                        "Фиксированный массив",
+                        "Фиксированное соответствие",
+                        "Фиксированная стурктура"
+                    }     
+                }
+            };
+            return keysType;
         }
 
         private Dictionary<string, bool> GetUsingTypes()

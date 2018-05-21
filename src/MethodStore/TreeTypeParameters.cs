@@ -66,9 +66,6 @@ namespace MethodStore
             }
         }
 
-        internal string SelectedTypes { get; private set; }
-
-
         internal string CurrentId { set => _currentId = value; }
 
         internal TreeTypeParameters(UpdateSelectedParameterTypesEvents updateSelectedParameterTypesEvents = null)

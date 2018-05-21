@@ -64,11 +64,13 @@ namespace MethodStore
 
         private void SetCurrentTypes()
         {
+            Dictionary<string, List<string>> dictionatyTypes = new Files.FileParametersTypes().IninializeDictionatyTypeName();
+
             foreach (string item in CurrentTypes.Replace(" ", "").Split(','))
             {
                 bool findSeparator = item.FirstOrDefault(f => f == '.') != char.MinValue;
 
-                string nameParent;
+                string nameParent = "";
                 string nameChildren;
 
                 if (findSeparator)
@@ -79,8 +81,19 @@ namespace MethodStore
                 }
                 else
                 {
-                    nameParent = "Примитивные типы";
                     nameChildren = item;
+
+                    foreach (KeyValuePair<string, List<string>> keyNames in dictionatyTypes)
+                    {
+                        foreach (string elementNames in keyNames.Value)
+                        {
+                            if (elementNames == nameChildren)
+                            {
+                                nameParent = keyNames.Key;
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 var children = _treeType.Tree.First(f => f.Text == nameParent).Children;
@@ -105,7 +118,8 @@ namespace MethodStore
                         if (stringBuilder.Length != 0)
                             stringBuilder.Append(", ");
 
-                        if (itemType.Text != "Примитивные типы")
+                        if (itemType.Text != "Примитивные типы"
+                            && itemType.Text != "Универсальные коллекции значений")
                         {
                             stringBuilder.Append(itemType.Text);
                             stringBuilder.Append(".");
