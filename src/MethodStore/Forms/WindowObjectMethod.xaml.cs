@@ -256,6 +256,7 @@ namespace MethodStore
             {
                 WindowSelectTypeParameters form = new WindowSelectTypeParameters()
                 {
+                    Owner = this,
                     CurrentTypes = parameter.Type,
                     ParametersTypes = ParametersTypes
                 };

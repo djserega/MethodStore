@@ -24,6 +24,9 @@ namespace MethodStore
     {
         private UpdateSelectedParameterTypesEvents _updateSelectedParameterTypes = new UpdateSelectedParameterTypesEvents();
 
+        private double _minLeft;
+        private double _minTop;
+
         internal string SelectedTypes { get; private set; }
         internal bool PressButton { get; private set; }
 
@@ -40,6 +43,11 @@ namespace MethodStore
 
         private void FormSelectTypeParameters_Loaded(object sender, RoutedEventArgs e)
         {
+            _minLeft = Owner.Left + 10;
+            _minTop = Owner.Top + 10;
+
+            SetPositionWindow(true);
+
             _treeType = new TreeTypeParameters(_updateSelectedParameterTypes);
             _treeType.FillingTree(ParametersTypes);
 
@@ -141,6 +149,15 @@ namespace MethodStore
         {
             PressButton = true;
             Close();
+        }
+
+        private void SetPositionWindow(bool loaded = false)
+        {
+            if (Left < _minLeft || loaded)
+                Left = _minLeft;
+
+            if (Top < _minTop || loaded)
+                Top = _minTop;
         }
     }
 }
