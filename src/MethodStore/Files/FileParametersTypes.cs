@@ -40,6 +40,9 @@ namespace MethodStore.Files
                 }
             };
 
+            Dictionary<string, string> dictionaryTranslate = GetTranslateTypes();
+            Dictionary<string, bool> usingType = GetUsingTypes();
+
             using (XmlReader xmlReader = XmlReader.Create(FullNameFileTypes))
             {
                 while (xmlReader.Read())
@@ -53,20 +56,31 @@ namespace MethodStore.Files
                         {
                             string typeName = xmlReader.LocalName;
 
-                            if (!string.IsNullOrWhiteSpace(typeName))
+                            if (dictionaryTranslate.ContainsKey(typeName))
                             {
-                                listType.Add(typeName);
-
-                                xmlReader.Read();
-
-                                string typeValue = xmlReader.Value;
-
-                                if (!string.IsNullOrWhiteSpace(typeValue))
+                                if (usingType.ContainsKey(typeName))
                                 {
-                                    if (keysType.ContainsKey(typeName))
-                                        keysType.First(f => f.Key == typeName).Value.Add(typeValue);
-                                    else
-                                        keysType.Add(typeName, new List<string>() { typeValue });
+                                    if (usingType[typeName])
+                                    {
+                                        string typeNameTranslation = dictionaryTranslate[typeName];
+
+                                        if (!string.IsNullOrWhiteSpace(typeNameTranslation))
+                                        {
+                                            listType.Add(typeNameTranslation);
+
+                                            xmlReader.Read();
+
+                                            string typeValue = xmlReader.Value;
+
+                                            if (!string.IsNullOrWhiteSpace(typeValue))
+                                            {
+                                                if (keysType.ContainsKey(typeNameTranslation))
+                                                    keysType.First(f => f.Key == typeNameTranslation).Value.Add(typeValue);
+                                                else
+                                                    keysType.Add(typeNameTranslation, new List<string>() { typeValue });
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             xmlReader.Read();
@@ -91,5 +105,63 @@ namespace MethodStore.Files
 
             return types;
         }
+
+        private Dictionary<string, bool> GetUsingTypes()
+        {
+            Dictionary<string, bool> dictionary = new Dictionary<string, bool>()
+            {
+                {"PrimitiveTypes", true },
+                {"Catalog", true },
+                {"Document", true },
+                {"Enum", true }
+            };
+            return dictionary;
+        }
+
+        private Dictionary<string, string> GetTranslateTypes()
+        {
+            Dictionary<string, string> dictionaryTranslate = new Dictionary<string, string>()
+            {
+                { "PrimitiveTypes", "Примитивные типы" },
+                { "Language", "Язык" },
+                { "Subsystem", "Подсистемы"},
+                { "StyleItem", "Элементы стиля"},
+                { "CommonPicture", "Общие картинки"},
+                { "Interface", "Интерфейсы"},
+                { "SessionParameter", "Параметры сеанса"},
+                { "Role", "Роли"},
+                { "CommonTemplate", "Общие макеты"},
+                { "FilterCriterion", "Критерии отбора"},
+                { "CommonModule", "Общие модули"},
+                { "CommonAttribute", "Общие реквизиты"},
+                { "ExchangePlan", "Планы обмена"},
+                { "XDTOPackage", "XDTO-пакеты"},
+                { "WebService", "Web-сервисы"},
+                { "EventSubscription", "Подписки на события"},
+                { "ScheduledJob", "Регламентные задания"},
+                { "FunctionalOption", "Функциональные опции"},
+                { "FunctionalOptionsParameter", "Параметры функциональных опций"},
+                { "CommonCommand", "Общие команды"},
+                { "CommandGroup", "Группы команд"},
+                { "Constant", "Константы"},
+                { "CommonForm", "Общие формы"},
+                { "Catalog", "СправочникСсылка"},
+                { "Document", "ДокументСсылка"},
+                { "DocumentNumerator", "Нумераторы документов"},
+                { "Sequence", "Последовательности"},
+                { "DocumentJournal", "Журналы документов"},
+                { "Enum", "ПеречислениеСсылка"},
+                { "Report", "Отчеты"},
+                { "DataProcessor", "Обработки"},
+                { "InformationRegister", "Регистры сведений"},
+                { "AccumulationRegister", "Регистры накопления"},
+                { "ChartOfCharacteristicTypes", "Планы видов характеристик"},
+                { "BusinessProcess", "Бизнес процессы"},
+                { "Task", "Задачи"},
+                { "ExternalDataSource", "Внешние источники данных"}
+            };
+            return dictionaryTranslate;
+        }
+
     }
 }
