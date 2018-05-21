@@ -87,6 +87,14 @@ namespace MethodStore
             CheckBoxId.currentId = currentId;
         }
 
+        internal void CheckParent()
+        {
+            for (int i = 0; i < Tree.Count; i++)
+            {
+                CheckParentByChild(Tree[i]);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)
@@ -151,6 +159,20 @@ namespace MethodStore
         {
             CheckChildNodes(child, isChecked);
             CheckParentNodes(parent);
+        }
+
+        private void CheckParentByChild(TreeTypeParameters parent)
+        {
+            bool isChecked = true;
+            foreach (TreeTypeParameters item in parent.Children)
+            {
+                if (!item.IsChecked.HasValue || !item.IsChecked.Value)
+                {
+                    isChecked = false;
+                    break;
+                }
+            }
+            parent.IsChecked = isChecked;
         }
 
         internal void FillingTree(ParametersTypes parametersTypes)

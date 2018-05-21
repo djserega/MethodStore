@@ -27,6 +27,7 @@ namespace MethodStore
         internal string SelectedTypes { get; private set; }
         internal bool PressButton { get; private set; }
 
+        internal string CurrentTypes { get; set; }
         internal ParametersTypes ParametersTypes { get; set; }
         private TreeTypeParameters _treeType;
 
@@ -35,6 +36,20 @@ namespace MethodStore
             InitializeComponent();
 
             _updateSelectedParameterTypes.UpdateSelectedParameterTypes += _updateSelectedParameterTypes_UpdateSelectedParameterTypes;
+        }
+
+        private void FormSelectTypeParameters_Loaded(object sender, RoutedEventArgs e)
+        {
+            _treeType = new TreeTypeParameters(_updateSelectedParameterTypes);
+            _treeType.FillingTree(ParametersTypes);
+
+            if (!string.IsNullOrWhiteSpace(CurrentTypes))
+            {
+                SetCurrentTypes();
+                _treeType.CheckParent();
+            }
+
+            TreeViewType.ItemsSource = _treeType.Tree;
         }
 
         private void _updateSelectedParameterTypes_UpdateSelectedParameterTypes()
@@ -47,13 +62,36 @@ namespace MethodStore
             _treeType.SetCurrentID(((CheckBox)sender).Uid);
         }
 
-        private void FormSelectTypeParameters_Loaded(object sender, RoutedEventArgs e)
+        private void SetCurrentTypes()
         {
-            _treeType = new TreeTypeParameters(_updateSelectedParameterTypes);
-            _treeType.FillingTree(ParametersTypes);
-            TreeViewType.ItemsSource = _treeType.Tree;
-        }
+            foreach (string item in CurrentTypes.Replace(" ", "").Split(','))
+            {
+                bool findSeparator = item.FirstOrDefault(f => f == '.') != char.MinValue;
 
+                string nameParent;
+                string nameChildren;
+
+                if (findSeparator)
+                {
+                    string[] itemSubstring = item.Split('.');
+                    nameParent = itemSubstring[0];
+                    nameChildren = itemSubstring[1];
+                }
+                else
+                {
+                    nameParent = "Примитивные типы";
+                    nameChildren = item;
+                }
+
+                var children = _treeType.Tree.First(f => f.Text == nameParent).Children;
+
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i].Text == nameChildren)
+                        children[i].IsChecked = true;
+                }
+            }
+        }
 
         private void SetSelectedTypes()
         {

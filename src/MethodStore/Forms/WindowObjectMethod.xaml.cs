@@ -252,18 +252,21 @@ namespace MethodStore
 
         private void ButtonOpenFormParametersTypes_Click(object sender, RoutedEventArgs e)
         {
-            WindowSelectTypeParameters form = new WindowSelectTypeParameters()
+            if (DataGridParameters.SelectedItem is Parameter parameter)
             {
-                ParametersTypes = ParametersTypes
-            };
-            form.ShowDialog();
+                WindowSelectTypeParameters form = new WindowSelectTypeParameters()
+                {
+                    CurrentTypes = parameter.Type,
+                    ParametersTypes = ParametersTypes
+                };
+                form.ShowDialog();
 
-            if (form.PressButton)
-                if (DataGridParameters.SelectedItem is Parameter parameter)
+                if (form.PressButton)
                 {
                     parameter.Type = form.SelectedTypes;
                     SetItemSourceDataGridParameters();
                 }
+            }
         }
 
     }
