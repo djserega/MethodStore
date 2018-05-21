@@ -23,7 +23,7 @@ namespace MethodStore.Files
             if (!fileInfo.Exists)
                 return null;
 
-            List<string> listType = new List<string>() { "Примитивные типы", "Универсальные коллекции значений" };
+            List<string> listType = InitializeListType();
             Dictionary<string, List<string>> keysType = IninializeDictionatyTypeName();
 
             Dictionary<string, string> dictionaryTranslate = GetTranslateTypes();
@@ -92,6 +92,17 @@ namespace MethodStore.Files
             return types;
         }
 
+        internal List<string> InitializeListType()
+        {
+            List<string> list = new List<string>()
+            {
+                "Примитивные типы",
+                "Универсальные коллекции значений",
+                "Общие объекты"
+            };
+            return list;
+        }
+
         internal Dictionary<string, List<string>> IninializeDictionatyTypeName()
         {
             Dictionary<string, List<string>> keysType = new Dictionary<string, List<string>>()
@@ -115,13 +126,23 @@ namespace MethodStore.Files
                         "Массив",
                         "Структура",
                         "Соответствие",
-                        "Список значений",
-                        "Таблица значений",
-                        "Дерево значений",
-                        "Фиксированный массив",
-                        "Фиксированное соответствие",
-                        "Фиксированная стурктура"
+                        "СписокЗначений",
+                        "ТаблицаЗначений",
+                        "ДеревоЗначений",
+                        "ФиксированныйСассив",
+                        "ФиксированноеСоответствие",
+                        "ФиксированнаяСтурктура"
                     }     
+                },
+                {
+                    "Общие объекты",
+                    new List<string>()
+                    {
+                        "Элемент",
+                        "УникальныйИдентификатор",
+                        "УправляемаяФорма",
+                        "СообщениеПользователю"
+                    }
                 }
             };
             return keysType;

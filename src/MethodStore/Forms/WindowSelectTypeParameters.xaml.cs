@@ -98,19 +98,22 @@ namespace MethodStore
 
                 if (!string.IsNullOrEmpty(nameParent))
                 {
-                    var children = _treeType.Tree.First(f => f.Text == nameParent).Children;
+                    var children = _treeType.Tree.FirstOrDefault(f => f.Text == nameParent)?.Children;
 
-                    for (int i = 0; i < children.Count; i++)
-                    {
-                        if (children[i].Text == nameChildren)
-                            children[i].IsChecked = true;
-                    }
+                    if (children != null)
+                        for (int i = 0; i < children.Count; i++)
+                        {
+                            if (children[i].Text == nameChildren)
+                                children[i].IsChecked = true;
+                        }
                 }
             }
         }
 
         private void SetSelectedTypes()
         {
+            List<string> listBaseType = new Files.FileParametersTypes().InitializeListType();
+
             StringBuilder stringBuilder = new StringBuilder();
             foreach (TreeTypeParameters itemType in _treeType.Tree)
             {
@@ -121,8 +124,7 @@ namespace MethodStore
                         if (stringBuilder.Length != 0)
                             stringBuilder.Append(", ");
 
-                        if (itemType.Text != "Примитивные типы"
-                            && itemType.Text != "Универсальные коллекции значений")
+                        if (string.IsNullOrEmpty(listBaseType.FirstOrDefault(f => f == itemType.Text)))
                         {
                             stringBuilder.Append(itemType.Text);
                             stringBuilder.Append(".");
