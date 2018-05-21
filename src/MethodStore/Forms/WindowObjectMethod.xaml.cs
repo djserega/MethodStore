@@ -267,6 +267,7 @@ namespace MethodStore
                     parameter.Type = form.SelectedTypes;
                     SetItemSourceDataGridParameters();
                 }
+                Activate();
             }
         }
 

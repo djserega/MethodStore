@@ -382,6 +382,12 @@ namespace MethodStore
                 ParametersTypes = _parametersTypes
             };
             formObject.Show();
+            formObject.Closed += FormObject_Closed;
+        }
+
+        private void FormObject_Closed(object sender, EventArgs e)
+        {
+            Activate();
         }
 
         private void MenuItemCopyToClipboard_Click(object sender, RoutedEventArgs e)
